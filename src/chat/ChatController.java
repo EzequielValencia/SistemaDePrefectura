@@ -57,7 +57,7 @@ public class ChatController implements Initializable,Runnable {
 	@Override
 	public void run() {
 		try {
-			ServerSocket serverSocket = new ServerSocket(9999);
+			ServerSocket serverSocket = new ServerSocket(9090);
 			while(ventanaAbierta){
 				Socket socketEntrada = serverSocket.accept();
 				ObjectInputStream flujoEntrada = new ObjectInputStream(socketEntrada.getInputStream());
