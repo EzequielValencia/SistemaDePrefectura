@@ -3,8 +3,10 @@
 	-fx-background-color: #1a1d56; 
 	-fx-text-fill:#fff;
 	-fx-font-weight: bold; 
+	-fx-font-size: 20px;
 }
 
-#loginFrame{
-	-fx-border-radius: 10%;
+.form-control{
+	-fx-font-size: 20px;
 }
+
