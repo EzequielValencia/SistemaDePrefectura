@@ -14,7 +14,7 @@
             <Font name="SansSerif Bold" size="19.0" />
          </font>
       </Label>
-      <JFXTextField fx:id="textUsuario" labelFloat="true" layoutX="42.0" layoutY="152.0" prefHeight="25.0" prefWidth="317.0" promptText="Usuario" styleClass="form-control" unFocusColor="#c61a1a" />
+      <JFXTextField fx:id="textUsuario" focusColor="#820f0f" labelFloat="true" layoutX="42.0" layoutY="152.0" prefHeight="25.0" prefWidth="317.0" promptText="Usuario" styleClass="form-control" />
       <JFXPasswordField fx:id="textPassword" labelFloat="true" layoutX="42.0" layoutY="223.0" prefHeight="38.0" prefWidth="317.0" promptText="Password" styleClass="form-control" />
       <JFXButton fx:id="botonIngresar" layoutX="42.0" layoutY="305.0" prefHeight="48.0" prefWidth="120.0" text="Ingresar">
          <font>
