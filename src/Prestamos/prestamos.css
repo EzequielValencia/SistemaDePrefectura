@@ -1,0 +1,15 @@
+/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+#contedPrestamos{
+	-fx-background-color: #1a1d56;
+	
+}
+
+#contenedorImagen{
+	-fx-border-color: #fff;
+}
+
+.label{
+	-fx-text-fill: #fff;
+	-fx-font-size: 12px;
+	-fx-font-weight: bold;
+}
