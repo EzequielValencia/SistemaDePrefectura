@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXDrawer?>
+<?import com.jfoenix.controls.JFXHamburger?>
+<?import com.jfoenix.controls.JFXToolbar?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MainFrameController">
+   <children>
+      <Pane fx:id="visorDeSecciones" layoutY="57.0" prefHeight="549.0" prefWidth="776.0" style="-fx-background-color: green;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="51.0" />
+      <JFXToolbar layoutX="-2.0" layoutY="1.0" prefHeight="52.0" prefWidth="709.0" AnchorPane.bottomAnchor="548.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <JFXHamburger fx:id="menuAmburguesa" fillWidth="false" layoutX="10.0" layoutY="10.0" prefHeight="34.0" prefWidth="43.0" style="-fx-cursor: hand;" />
+      <Pane fx:id="visorDeSecciones1" layoutX="10.0" layoutY="67.0" prefHeight="549.0" prefWidth="776.0" style="-fx-background-color: red;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="51.0" />
+      <JFXDrawer id="sideBar" fx:id="sideBar" layoutX="10.0" layoutY="61.0" prefHeight="460.0" prefWidth="130.0" stylesheets="@mainFrame.css" AnchorPane.bottomAnchor="92.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="48.0" />
+   </children>
+</AnchorPane>

@@ -1,0 +1,33 @@
+/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+#panelmagen{
+	-fx-background-image: url('../images/logo.png');
+	-fx-background-repeat: no-repeat ;
+	-fx-background-size: stretch ;
+}
+
+.card-unpadded{
+	-fx-background-color: #1A1D56;
+	-fx-border-radius: 4.0;
+    -fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 6.0, 0.7, 0.0,
+        1.5);
+    -fx-padding: 0 0 0 0;
+}
+
+.button{
+	-fx-background-color: #fecc09;
+	-fx-border-color: #fff #fecc09 #fecc09;
+	-fx-font-family: SansSerif;
+	-fx-font-size: 15px;
+	-fx-font-weight: bold;
+	-fx-text-fill: #1A1D56;
+}
+
+.button:hover{
+	-fx-background-color: #936B28;
+}
+
+
+#imagenUser{
+	-fx-border-radius: 50%;
+	-fx-border-color: #fff;
+}

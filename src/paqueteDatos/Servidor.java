@@ -57,7 +57,7 @@ class MarcoServidor extends JFrame implements Runnable,WindowListener{
 	public void run() {
 		// TODO Auto-generated method stub
 		try {
-			servidor = new ServerSocket(9999);
+			servidor = new ServerSocket(5000);
 			while(servidorCorriendo){
 				
 

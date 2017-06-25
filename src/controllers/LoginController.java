@@ -1,5 +1,6 @@
 package controllers;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.Vector;
@@ -10,9 +11,13 @@ import com.jfoenix.controls.JFXTextField;
 
 import dao.DAO;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Rectangle2D;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.paint.Paint;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import pojos.Usuario;
 
@@ -27,17 +32,13 @@ public class LoginController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
-		
+		System.out.println(textUsuario.getStyle());
 		botonCerrar.setOnAction(e->{
 			cerrarLogin();
 		});
 		
 		botonIngresar.setOnAction(e->{
-			if(camposLlenos()){
 				verificaUsuario();
-			}else{
-				
-			}
 		});
 	}
 	
@@ -46,43 +47,34 @@ public class LoginController implements Initializable {
 		escenarioActual.close();
 	}
 	
-	private boolean camposLlenos(){
-		boolean camposLlenos=true;
-		if(textUsuario.getText().length()<=0){
-			textUsuario.setUnFocusColor(Paint.valueOf("#c61a1a"));
-			textUsuario.setFocusColor(Paint.valueOf("#820f0f"));
-			labelMensaje.setText("Ingrese su nombre de usuario");
-			labelMensaje.setStyle("-fx-text-fill:#c21818;");
-			camposLlenos=false;
-		}
-		if(textPassword.getText().length()<=0){
-			textPassword.setUnFocusColor(Paint.valueOf("#c61a1a"));
-			textPassword.setFocusColor(Paint.valueOf("#820f0f"));
-			labelMensaje.setText("Ingrese una contraseña");
-			labelMensaje.setStyle("-fx-text-fill:#c21818;");
-			camposLlenos=false;
-		}
-		if(textUsuario.getText().length()<=0 && textPassword.getText().length()<=0){
-			textUsuario.setUnFocusColor(Paint.valueOf("#c61a1a"));
-			textUsuario.setFocusColor(Paint.valueOf("#820f0f"));
-			
-			textPassword.setUnFocusColor(Paint.valueOf("#c61a1a"));
-			textPassword.setFocusColor(Paint.valueOf("#820f0f"));
-			labelMensaje.setText("Ingrese usuario y contraseña");
-			labelMensaje.setStyle("-fx-text-fill:#c21818;");
-			camposLlenos=false;
-		}
-		return camposLlenos;
-	}
-	
 	private void verificaUsuario(){
 		Vector<Usuario> usuarios = DAO.verificaUsuario(textUsuario.getText(), textPassword.getText());
 		if(usuarios.size()==1){
-			labelMensaje.setText("Acceso correcto");
-			labelMensaje.setStyle("-fx-text-fill:#23bb58;");
+			abreVentanaPricipal();
 		}else{
 			labelMensaje.setText("Verifique su usuario y contreseña");
 			labelMensaje.setStyle("-fx-text-fill:#c21818;");
+		}
+	}
+	
+	private void abreVentanaPricipal(){
+		Stage esenarioActual;
+		Parent root;
+		Scene escena;
+		Rectangle2D tamanioPantalla = Screen.getPrimary().getBounds();
+		
+		esenarioActual = (Stage) botonIngresar.getScene().getWindow();
+		try {
+			root = FXMLLoader.load(getClass().getResource("/view/mainFrame.fxml"));
+			escena = new Scene(root,tamanioPantalla.getWidth(),700);
+			
+			esenarioActual.setScene(escena);
+			esenarioActual.show();
+			esenarioActual.setX(0);
+			esenarioActual.setY(0);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 }

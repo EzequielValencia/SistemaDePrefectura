@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="460.0" prefWidth="130.0" styleClass="card-unpadded" stylesheets="@sideBar.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.SideBarController">
+	<children>
+		<Pane id="panelmagen" prefHeight="150.0" prefWidth="130.0">
+         <children>
+            <Pane id="imagenUser" layoutX="25.0" layoutY="35.0" prefHeight="80.0" prefWidth="80.0">
+               <children>
+                  <ImageView fx:id="imagenUsuario" fitHeight="46.0" fitWidth="47.0" layoutX="17.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </Pane>
+         </children></Pane>
+		<JFXButton id="botonRegistroPrestamos" fx:id="botonRegistroPrestamos" prefHeight="60.0" prefWidth="129.0" text="Prestamos">
+			<font>
+				<Font name="SansSerif Regular" size="12.0" />
+			</font>
+		</JFXButton>
+		<JFXButton id="botonChat" fx:id="botonChat" prefHeight="60.0" prefWidth="129.0" text="Chat" />
+		<JFXButton id="botonAsistenciaProfesores" fx:id="botonAsistenciaProfesores" prefHeight="60.0" prefWidth="129.0" text="Asistencia&#10;Profesores" textAlignment="CENTER" />
+		<JFXButton id="botonSalir" fx:id="botonSalir" prefHeight="60.0" prefWidth="129.0" text="Salir" />
+	</children>
+</VBox>

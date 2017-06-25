@@ -43,7 +43,7 @@ public class ChatController implements Initializable,Runnable {
 	private void enviaMensaje(String mensaje){
 		try {
 			System.out.println("Enviando mensaje");
-			Socket socket = new Socket("192.168.1.75",9999);			
+			Socket socket = new Socket("192.168.1.72",5000);			
 			DatosEntradaSalida datos = new DatosEntradaSalida(textUsuario.getText(),mensaje,"Yo mero");
 			ObjectOutputStream datosDeSalida= new ObjectOutputStream(socket.getOutputStream());
 			datosDeSalida.writeObject(datos);
@@ -57,7 +57,7 @@ public class ChatController implements Initializable,Runnable {
 	@Override
 	public void run() {
 		try {
-			ServerSocket serverSocket = new ServerSocket(9999);
+			ServerSocket serverSocket = new ServerSocket(5000);
 			while(ventanaAbierta){
 				Socket socketEntrada = serverSocket.accept();
 				ObjectInputStream flujoEntrada = new ObjectInputStream(socketEntrada.getInputStream());

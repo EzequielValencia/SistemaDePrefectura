@@ -14,7 +14,7 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 		
 		try {
-			Parent root = FXMLLoader.load(getClass().getResource("/login/login.fxml"));
+			Parent root = FXMLLoader.load(getClass().getResource("/view/login.fxml"));
 			Scene scene = new Scene(root,400,400);
 			
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
@@ -29,8 +29,9 @@ public class Main extends Application {
 	}
 	
 	public static void main(String[] args) {
-		DAO.conectarDB();
-		launch(args);
+		if(DAO.conectarDB()){
+			launch(args);
+		}
 	}
 	
 }

@@ -21,13 +21,14 @@ public class DAO {
 	 * Debido a que ya se cuenta con una DB definida dentro de este equipo el codigo
 	 * ya incluye la URL de donde se conectara la base de datos
 	 */
-	public static void conectarDB(){
+	public static boolean conectarDB(){
 		String servidor = "jdbc:mysql://localhost:3306/sistemaprefectura";
 		String usuario = "root";
 		String password = "";
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			conexion = DriverManager.getConnection(servidor,usuario,password);
+			return true;
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -36,6 +37,7 @@ public class DAO {
 			e.printStackTrace();
 			System.out.println("Algo salio mal");
 		}
+		return false;
 	}
 
 	public static Vector<Usuario> verificaUsuario(String usuario,String password){
