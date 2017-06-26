@@ -4,7 +4,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.transitions.hamburger.HamburgerBackArrowBasicTransition;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -20,7 +19,8 @@ public class SideBarController implements Initializable{
 	private JFXButton botonAsistenciaProfesores;
 	@FXML
 	private JFXButton botonChat;
-
+	@FXML
+	private JFXButton botonCreacionDeExamenes;
 	@FXML
 	private JFXButton botonSalir;
 	
@@ -44,26 +44,21 @@ public class SideBarController implements Initializable{
 	private void agregarAcionesABotones(){
 		botonSalir.setOnAction(e->System.exit(0));
 		botonRegistroPrestamos.setOnAction(e->abrirVistaPrestamos());
-		botonAsistenciaProfesores.setOnAction(e->abrirVistaAsistenciaProfesores());
+		botonCreacionDeExamenes.setOnAction(e->abrirVistaExamenes());
+		botonChat.setOnAction(e->{});
 	}
-
-	private void cambiaMenuHamburguesa(){
-		System.out.println("Cambiando menu");
-		HamburgerBackArrowBasicTransition trancision = new HamburgerBackArrowBasicTransition(MainFrameController.menu);
-		trancision.setRate(trancision.getRate()*-1);
-		trancision.play();
-		trancision.play();
-	}
-	private void abrirVistaAsistenciaProfesores(){
-		cambiaMenuHamburguesa();
-		MainFrameController.visorSecciones1.setVisible(false);
-		MainFrameController.visorSecciones.setVisible(true);
+	
+	private void abrirVistaExamenes(){
+		
+		MainFrameController.seccionExamenes.setVisible(true);
+		MainFrameController.seccionPrestamosVista.setVisible(false);
+		MainFrameController.sideBarVista.close();
 	}
 	
 	private void abrirVistaPrestamos(){
-		cambiaMenuHamburguesa();
-		MainFrameController.visorSecciones.setVisible(false);
-		MainFrameController.visorSecciones1.setVisible(true);
 		
+		MainFrameController.seccionExamenes.setVisible(false);
+		MainFrameController.seccionPrestamosVista.setVisible(true);
+		MainFrameController.sideBarVista.close();
 	}
 }

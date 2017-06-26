@@ -11,6 +11,7 @@ import com.jfoenix.transitions.hamburger.HamburgerBackArrowBasicTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.SplitPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -18,16 +19,19 @@ import javafx.scene.layout.VBox;
 public class MainFrameController implements Initializable{
 
 	@FXML private JFXDrawer sideBar;
-	@FXML private  Pane visorDeSecciones,visorDeSecciones1;
-	public static Pane visorSecciones,visorSecciones1;
+	@FXML private Pane seccionCreacionDeExamenes;
+	@FXML private SplitPane seccionCreacionDePrestamos;
 	@FXML private JFXHamburger menuAmburguesa;
-	public static JFXHamburger menu;
+	
+	public static JFXDrawer sideBarVista;
+	public static Pane seccionExamenes;
+	public static SplitPane seccionPrestamosVista;
+	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		visorSecciones = visorDeSecciones;
-		visorSecciones1 = visorDeSecciones1;
-		menu = menuAmburguesa;
-		// TODO Auto-generated method stub
+		seccionExamenes = seccionCreacionDeExamenes;
+		seccionPrestamosVista = seccionCreacionDePrestamos;
+		sideBarVista = sideBar;
 		try {
 			
 			VBox sideBar = FXMLLoader.load(getClass().getResource("/view/sideBar.fxml"));
@@ -65,4 +69,5 @@ public class MainFrameController implements Initializable{
 		});
 	}
 
+	
 }
