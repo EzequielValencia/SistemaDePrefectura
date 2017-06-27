@@ -1,1 +1,53 @@
 /* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+
+
+
+.table-view .column-header-background{
+    -fx-background-color: #1A1D56;
+}
+
+.table-view .column-header-background .label{
+    -fx-background-color: #1A1D56;
+    -fx-text-fill: white;
+    -fx-text-alignment: center ;
+}
+
+.table-view .column-header {
+    -fx-background-color: transparent;
+    -fx-border-color: #fff;
+}
+
+.table-view .table-cell{
+    -fx-text-fill: white;
+    
+}
+
+.table-row-cell{
+    -fx-background-color: -fx-table-cell-border-color, #616161;
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-padding: 0.0em; /* 0 */
+}
+
+.table-row-cell:odd{
+    -fx-background-color: -fx-table-cell-border-color, #424242;
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-padding: 0.0em; /* 0 */  
+}
+
+.table-row-cell:selected {
+    -fx-background-color: #005797;
+    -fx-background-insets: 0;
+    -fx-background-radius: 1;
+}
+
+#logoPrestamos{
+	-fx-background-color: #1A1D56;
+}
+
+#etiquetaBorrarTodo{
+	-fx-text-fill: #373578;
+}
+
+#etiquetaBorrarTodo :active{
+	-fx-background-color: #1A1D56; 
+}

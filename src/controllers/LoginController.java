@@ -66,7 +66,7 @@ public class LoginController implements Initializable {
 		esenarioActual = (Stage) botonIngresar.getScene().getWindow();
 		try {
 			root = FXMLLoader.load(getClass().getResource("/view/mainFrame.fxml"));
-			escena = new Scene(root,tamanioPantalla.getWidth(),700);
+			escena = new Scene(root,tamanioPantalla.getWidth(),tamanioPantalla.getHeight()-80);
 			
 			esenarioActual.setScene(escena);
 			esenarioActual.show();

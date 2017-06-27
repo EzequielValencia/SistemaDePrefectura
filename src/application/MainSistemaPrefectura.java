@@ -9,7 +9,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 
 public class MainSistemaPrefectura extends Application {
@@ -26,7 +25,7 @@ public class MainSistemaPrefectura extends Application {
 			primaryStage.getIcons().add(new Image("/images/icon.png"));
 			//primaryStage.initStyle( StageStyle.UNDECORATED );
 			primaryStage.show();
-			
+		
 		} catch(Exception e) {
 			e.printStackTrace();
 		}

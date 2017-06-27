@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXDrawer?>
 <?import com.jfoenix.controls.JFXHamburger?>
+<?import com.jfoenix.controls.JFXTextField?>
 <?import com.jfoenix.controls.JFXToolbar?>
 <?import javafx.geometry.Point3D?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MainFrameController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1024.0" stylesheets="@mainFrame.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MainFrameController">
    <children>
       <JFXToolbar prefHeight="52.0" prefWidth="709.0" translateZ="1.0" AnchorPane.bottomAnchor="548.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <rotationAxis>
@@ -18,28 +22,34 @@
          </rotationAxis></JFXToolbar>
       <JFXHamburger fx:id="menuAmburguesa" fillWidth="false" layoutX="10.0" layoutY="10.0" prefHeight="34.0" prefWidth="43.0" style="-fx-cursor: hand;" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0" />
       <Pane fx:id="seccionCreacionDeExamenes" layoutX="10.0" layoutY="67.0" prefHeight="549.0" prefWidth="776.0" style="-fx-background-color: green;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="51.0" />
-      <SplitPane fx:id="seccionCreacionDePrestamos" dividerPositions="0.29797979797979796" layoutX="-1.0" layoutY="44.0" prefHeight="555.0" prefWidth="1024.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="44.0">
+      <SplitPane fx:id="seccionCreacionDePrestamos" dividerPositions="0.3659491193737769" layoutX="-1.0" layoutY="44.0" prefHeight="555.0" prefWidth="1024.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="44.0">
          <items>
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" />
+            <AnchorPane id="panelBusqueda" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <JFXTextField labelFloat="true" layoutX="14.0" layoutY="14.0" prefHeight="25.0" prefWidth="148.0" promptText="Codigo articulo" />
+                  <JFXButton layoutX="265.0" layoutY="16.0" prefHeight="34.0" prefWidth="92.0" AnchorPane.leftAnchor="265.0" AnchorPane.rightAnchor="14.0" />
+                  <Label id="etiquetaBorrarTodo" layoutX="172.0" layoutY="25.0" style="-fx-font-weight: bold;" text="Borrar Todo" underline="true">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Label>
+               </children></AnchorPane>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="558.0" prefWidth="708.0">
                <children>
-                  <TableView layoutY="152.0" prefHeight="402.0" prefWidth="714.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="152.0">
+                  <TableView fx:id="tablaPrestamos" layoutY="69.0" prefHeight="485.0" prefWidth="714.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="69.0">
                      <columns>
-                        <TableColumn prefWidth="75.0" text="C1" />
-                        <TableColumn prefWidth="75.0" text="C2" />
-                        <TableColumn prefWidth="75.0" text="Column X" />
-                        <TableColumn prefWidth="75.0" text="Column X" />
-                        <TableColumn prefWidth="75.0" text="Column X" />
-                        <TableColumn prefWidth="75.0" text="Column X" />
-                        <TableColumn prefWidth="75.0" text="Column X" />
-                        <TableColumn prefWidth="75.0" text="Column X" />
-                        <TableColumn prefWidth="75.0" text="Column X" />
+                        <TableColumn prefWidth="95.0" text="Nombre del Solicitante" />
+                        <TableColumn prefWidth="55.0" text="Numero de serie" />
+                        <TableColumn prefWidth="75.0" text="Fecha de prestamo" />
+                        <TableColumn prefWidth="75.0" text="Grupo Y Turno" />
+                        <TableColumn prefWidth="75.0" text="Fecha de entrega" />
+                        <TableColumn prefWidth="75.0" text="Nombre del Prefecto" />
                      </columns>
                   </TableView>
+                  <JFXDrawer id="sideBar" fx:id="sideBar" layoutX="170.0" layoutY="-164.0" prefHeight="460.0" prefWidth="130.0" stylesheets="@mainFrame.css" AnchorPane.bottomAnchor="304.0" AnchorPane.leftAnchor="170.0" AnchorPane.topAnchor="-164.0" />
                </children>
             </AnchorPane>
          </items>
       </SplitPane>
-      <JFXDrawer id="sideBar" fx:id="sideBar" layoutX="10.0" layoutY="44.0" prefHeight="460.0" prefWidth="130.0" stylesheets="@mainFrame.css" AnchorPane.bottomAnchor="96.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="44.0" />
    </children>
 </AnchorPane>
