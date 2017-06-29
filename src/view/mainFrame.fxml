@@ -3,6 +3,8 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXDrawer?>
 <?import com.jfoenix.controls.JFXHamburger?>
+<?import com.jfoenix.controls.JFXListView?>
+<?import com.jfoenix.controls.JFXTextArea?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import com.jfoenix.controls.JFXToolbar?>
 <?import javafx.geometry.Point3D?>
@@ -11,6 +13,8 @@
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 
@@ -27,29 +31,44 @@
             <AnchorPane id="panelBusqueda" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
                   <JFXTextField labelFloat="true" layoutX="14.0" layoutY="14.0" prefHeight="25.0" prefWidth="148.0" promptText="Codigo articulo" />
-                  <JFXButton layoutX="265.0" layoutY="16.0" prefHeight="34.0" prefWidth="92.0" AnchorPane.leftAnchor="265.0" AnchorPane.rightAnchor="14.0" />
+                  <JFXButton layoutX="265.0" layoutY="9.0" prefHeight="41.0" prefWidth="92.0" text="Buscar &#10;articulo" textAlignment="CENTER" />
                   <Label id="etiquetaBorrarTodo" layoutX="172.0" layoutY="25.0" style="-fx-font-weight: bold;" text="Borrar Todo" underline="true">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Label>
+                  <Pane layoutY="58.0" prefHeight="491.0" prefWidth="371.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="58.0">
+                     <children>
+                        <JFXTextField fx:id="textNombreArticulo" labelFloat="true" layoutX="20.0" layoutY="12.0" prefHeight="25.0" prefWidth="194.0" promptText="Nombre Articulo" />
+                        <JFXTextField fx:id="textNombreArticulo1" labelFloat="true" layoutX="20.0" layoutY="50.0" prefHeight="25.0" prefWidth="194.0" promptText="Categoria" />
+                        <JFXTextArea labelFloat="true" layoutX="17.0" layoutY="87.0" prefHeight="41.0" prefWidth="205.0" promptText="Descripción" />
+                        <ImageView fx:id="imagenArticulo" fitHeight="116.0" fitWidth="138.0" layoutX="222.0" layoutY="16.0" pickOnBounds="true">
+                           <image>
+                              <Image url="@../images/arduino.png" />
+                           </image>
+                        </ImageView>
+                        <JFXListView layoutX="226.0" layoutY="145.0" prefHeight="107.0" prefWidth="130.0" />
+                     </children>
+                  </Pane>
                </children></AnchorPane>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="558.0" prefWidth="708.0">
                <children>
                   <TableView fx:id="tablaPrestamos" layoutY="69.0" prefHeight="485.0" prefWidth="714.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="69.0">
                      <columns>
                         <TableColumn prefWidth="95.0" text="Nombre del Solicitante" />
+                        <TableColumn prefWidth="75.0" text="Nombre del articulo" />
                         <TableColumn prefWidth="55.0" text="Numero de serie" />
+                        <TableColumn prefWidth="75.0" text="Categoria" />
                         <TableColumn prefWidth="75.0" text="Fecha de prestamo" />
                         <TableColumn prefWidth="75.0" text="Grupo Y Turno" />
                         <TableColumn prefWidth="75.0" text="Fecha de entrega" />
                         <TableColumn prefWidth="75.0" text="Nombre del Prefecto" />
                      </columns>
                   </TableView>
-                  <JFXDrawer id="sideBar" fx:id="sideBar" layoutX="170.0" layoutY="-164.0" prefHeight="460.0" prefWidth="130.0" stylesheets="@mainFrame.css" AnchorPane.bottomAnchor="304.0" AnchorPane.leftAnchor="170.0" AnchorPane.topAnchor="-164.0" />
                </children>
             </AnchorPane>
          </items>
       </SplitPane>
+      <JFXDrawer id="sideBar" fx:id="sideBar" layoutY="50.0" prefHeight="460.0" prefWidth="130.0" stylesheets="@mainFrame.css" />
    </children>
 </AnchorPane>
