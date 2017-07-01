@@ -51,3 +51,9 @@
 #etiquetaBorrarTodo :active{
 	-fx-background-color: #1A1D56; 
 }
+
+.button{
+	-fx-background-color:#1A1D56;
+	-fx-text-fill:#fff;
+	-fx-font-weight:bold;
+}
