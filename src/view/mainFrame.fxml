@@ -17,108 +17,62 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity"
-	minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0"
-	prefWidth="1024.0" stylesheets="@mainFrame.css" xmlns="http://javafx.com/javafx/8.0.111"
-	xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MainFrameController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1024.0" stylesheets="@mainFrame.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MainFrameController">
 	<children>
-		<JFXToolbar prefHeight="52.0" prefWidth="709.0" translateZ="1.0"
-			AnchorPane.bottomAnchor="548.0" AnchorPane.leftAnchor="0.0"
-			AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+		<JFXToolbar prefHeight="52.0" prefWidth="709.0" translateZ="1.0" AnchorPane.bottomAnchor="548.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 			<rotationAxis>
 				<Point3D z="10.0" />
 			</rotationAxis>
 		</JFXToolbar>
-		<JFXHamburger fx:id="menuAmburguesa" fillWidth="false"
-			layoutX="10.0" layoutY="10.0" prefHeight="34.0" prefWidth="43.0"
-			style="-fx-cursor: hand;" AnchorPane.leftAnchor="10.0"
-			AnchorPane.topAnchor="10.0" />
-		<Pane fx:id="seccionCreacionDeExamenes" layoutX="10.0" layoutY="67.0"
-			prefHeight="549.0" prefWidth="776.0" style="-fx-background-color: green;"
-			visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-			AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="51.0" />
-		<SplitPane fx:id="seccionCreacionDePrestamos"
-			dividerPositions="0.3659491193737769" layoutX="-1.0" layoutY="44.0"
-			prefHeight="555.0" prefWidth="1024.0" AnchorPane.bottomAnchor="0.0"
-			AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-			AnchorPane.topAnchor="44.0">
+		<JFXHamburger fx:id="menuAmburguesa" fillWidth="false" layoutX="10.0" layoutY="10.0" prefHeight="34.0" prefWidth="43.0" style="-fx-cursor: hand;" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0" />
+		<Pane fx:id="seccionCreacionDeExamenes" layoutX="10.0" layoutY="67.0" prefHeight="549.0" prefWidth="776.0" style="-fx-background-color: green;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="51.0" />
+		<SplitPane fx:id="seccionCreacionDePrestamos" dividerPositions="0.3659491193737769" layoutX="-1.0" layoutY="44.0" prefHeight="555.0" prefWidth="1024.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="44.0">
 			<items>
-				<AnchorPane id="panelBusqueda" minHeight="0.0" minWidth="0.0"
-					prefHeight="160.0" prefWidth="100.0">
+				<AnchorPane id="panelBusqueda" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
 					<children>
-						<Pane prefHeight="549.0" prefWidth="371.0"
-							AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="0.0"
-							AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+						<Pane prefHeight="549.0" prefWidth="371.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 							<children>
-								<JFXTextField fx:id="textNombreArticulo"
-									labelFloat="true" layoutX="20.0" layoutY="102.0" prefHeight="25.0"
-									prefWidth="194.0" promptText="Nombre Articulo" />
-								<JFXTextArea fx:id="areaDescripcionArticulo"
-									labelFloat="true" layoutX="17.0" layoutY="154.0" prefHeight="41.0"
-									prefWidth="205.0" promptText="Descripción" />
-								<ImageView fx:id="imagenArticulo" fitHeight="116.0"
-									fitWidth="138.0" layoutX="222.0" layoutY="66.0" pickOnBounds="true" />
-								<JFXButton fx:id="botonAgregarALista" layoutX="20.0"
-									layoutY="478.0" prefHeight="25.0" prefWidth="106.0" text="Agregar a lista">
+								<JFXTextField fx:id="textNombreArticulo" labelFloat="true" layoutX="20.0" layoutY="102.0" prefHeight="25.0" prefWidth="194.0" promptText="Nombre Articulo" />
+								<JFXTextArea fx:id="areaDescripcionArticulo" labelFloat="true" layoutX="17.0" layoutY="154.0" prefHeight="41.0" prefWidth="205.0" promptText="Descripción" />
+								<ImageView fx:id="imagenArticulo" fitHeight="116.0" fitWidth="138.0" layoutX="222.0" layoutY="66.0" pickOnBounds="true" />
+								<JFXButton fx:id="botonAgregarALista" layoutX="20.0" layoutY="478.0" prefHeight="25.0" prefWidth="106.0" text="Agregar a lista">
 									<cursor>
 										<Cursor fx:constant="HAND" />
 									</cursor>
 								</JFXButton>
-								<JFXButton fx:id="botonEliminarDeLista" layoutX="249.0"
-									layoutY="478.0" text="Eliminar de lista">
+								<JFXButton fx:id="botonEliminarDeLista" layoutX="249.0" layoutY="478.0" text="Eliminar de lista">
 									<cursor>
 										<Cursor fx:constant="HAND" />
 									</cursor>
 								</JFXButton>
-								<JFXButton fx:id="botonBuscarArticulo" layoutX="256.0"
-									layoutY="46.0" prefHeight="41.0" prefWidth="92.0"
-									text="Buscar &#10;articulo" textAlignment="CENTER">
+								<JFXButton fx:id="botonBuscarArticulo" layoutX="256.0" layoutY="46.0" prefHeight="41.0" prefWidth="92.0" text="Buscar &#10;articulo" textAlignment="CENTER">
 									<cursor>
 										<Cursor fx:constant="HAND" />
 									</cursor>
 								</JFXButton>
-								<Label id="etiquetaBorrarTodo" fx:id="etiquetaBorrarTodo"
-									layoutX="180.0" layoutY="67.0" style="-fx-font-weight: bold;"
-									text="Borrar Todo" underline="true">
+								<Label id="etiquetaBorrarTodo" fx:id="etiquetaBorrarTodo" layoutX="180.0" layoutY="67.0" style="-fx-font-weight: bold;" text="Borrar Todo" underline="true">
 									<cursor>
 										<Cursor fx:constant="HAND" />
 									</cursor>
 								</Label>
-								<JFXTextField fx:id="textCodigoArticulo"
-									labelFloat="true" layoutX="20.0" layoutY="55.0" prefHeight="25.0"
-									prefWidth="148.0" promptText="Codigo articulo" />
-								<JFXTextField fx:id="textCodigoSolicitante"
-									labelFloat="true" layoutX="20.0" layoutY="276.0" prefHeight="25.0"
-									prefWidth="118.0" promptText="Codigo Solicitante" />
-								<JFXTextField fx:id="textNombreSolicitante"
-									labelFloat="true" layoutX="20.0" layoutY="332.0" prefHeight="25.0"
-									prefWidth="327.0" promptText="Nombre" />
-								<JFXTextField fx:id="textGrado" labelFloat="true"
-									layoutX="17.0" layoutY="397.0" prefHeight="25.0" prefWidth="56.0"
-									promptText="Grado" />
-								<JFXTextField fx:id="textGrupo" labelFloat="true"
-									layoutX="94.0" layoutY="397.0" prefHeight="25.0" prefWidth="106.0"
-									promptText="Grupo" />
-								<JFXTextField fx:id="textTurno" labelFloat="true"
-									layoutX="214.0" layoutY="397.0" promptText="Turno" />
-								<Label id="etiquetaBorrarTodo" fx:id="etiquetaBorrarSolicitante"
-									layoutX="151.0" layoutY="287.0" style="-fx-font-weight: bold;"
-									text="Borrar Todo" underline="true">
+								<JFXTextField fx:id="textCodigoArticulo" labelFloat="true" layoutX="20.0" layoutY="55.0" prefHeight="25.0" prefWidth="148.0" promptText="Codigo articulo" />
+								<JFXTextField fx:id="textCodigoSolicitante" labelFloat="true" layoutX="20.0" layoutY="276.0" prefHeight="25.0" prefWidth="118.0" promptText="Codigo Solicitante" />
+								<JFXTextField fx:id="textNombreSolicitante" labelFloat="true" layoutX="20.0" layoutY="332.0" prefHeight="25.0" prefWidth="327.0" promptText="Nombre" />
+								<JFXTextField fx:id="textGrado" labelFloat="true" layoutX="17.0" layoutY="397.0" prefHeight="25.0" prefWidth="56.0" promptText="Grado" />
+								<JFXTextField fx:id="textGrupo" labelFloat="true" layoutX="94.0" layoutY="397.0" prefHeight="25.0" prefWidth="106.0" promptText="Grupo" />
+								<JFXTextField fx:id="textTurno" labelFloat="true" layoutX="214.0" layoutY="397.0" promptText="Turno" />
+								<Label id="etiquetaBorrarTodo" fx:id="etiquetaBorrarSolicitante" layoutX="151.0" layoutY="287.0" style="-fx-font-weight: bold;" text="Borrar Todo" underline="true">
 									<cursor>
 										<Cursor fx:constant="HAND" />
 									</cursor>
 								</Label>
-								<JFXButton fx:id="botonBuscarAlumno" layoutX="255.0"
-									layoutY="257.0" prefHeight="41.0" prefWidth="92.0" text="Buscar&#10;Alumno"
-									textAlignment="CENTER" />
-								<Label layoutX="14.0" layoutY="14.0" prefHeight="17.0"
-									prefWidth="334.0" text="Articulo">
+								<JFXButton fx:id="botonBuscarAlumno" layoutX="255.0" layoutY="257.0" prefHeight="41.0" prefWidth="92.0" text="Buscar&#10;Alumno" textAlignment="CENTER" />
+								<Label layoutX="14.0" layoutY="14.0" prefHeight="17.0" prefWidth="334.0" text="Articulo">
 									<font>
 										<Font size="18.0" />
 									</font>
 								</Label>
-								<Label layoutX="19.0" layoutY="221.0" prefHeight="17.0"
-									prefWidth="334.0" text="Solicitante">
+								<Label layoutX="19.0" layoutY="221.0" prefHeight="17.0" prefWidth="334.0" text="Solicitante">
 									<font>
 										<Font size="18.0" />
 									</font>
@@ -127,38 +81,24 @@
 						</Pane>
 					</children>
 				</AnchorPane>
-				<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="558.0"
-					prefWidth="708.0">
+				<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="558.0" prefWidth="708.0">
 					<children>
-						<TableView fx:id="tablaPrestamos" layoutY="69.0"
-							prefHeight="485.0" prefWidth="714.0" styleClass="bordered"
-							AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-							AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="69.0">
+						<TableView fx:id="tablaPrestamos" layoutY="69.0" prefHeight="485.0" prefWidth="714.0" styleClass="bordered" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="69.0">
 							<columns>
-								<TableColumn fx:id="nombreSolicitante" prefWidth="95.0"
-									text="Nombre del Solicitante" />
-								<TableColumn fx:id="nombreArticulo" prefWidth="75.0"
-									text="Nombre del articulo" />
-								<TableColumn fx:id="numeroDeSerie" prefWidth="55.0"
-									text="Numero de serie" />
-								<TableColumn fx:id="categoriaArticulo" prefWidth="75.0"
-									text="Categoria" />
-								<TableColumn fx:id="fechaPrestamo" prefWidth="75.0"
-									text="Fecha de prestamo" />
-								<TableColumn fx:id="grupoYTurno" prefWidth="75.0"
-									text="Grupo Y Turno" />
-								<TableColumn fx:id="fechaDeEntrega" prefWidth="75.0"
-									text="Fecha de entrega" />
-								<TableColumn fx:id="fechaNombrePrefecto" prefWidth="75.0"
-									text="Nombre del Prefecto" />
+								<TableColumn fx:id="nombreSolicitante" prefWidth="95.0" text="Nombre del Solicitante" />
+								<TableColumn fx:id="nombreArticulo" prefWidth="75.0" text="Nombre del articulo" />
+								<TableColumn fx:id="numeroDeSerie" prefWidth="55.0" text="Numero de serie" />
+								<TableColumn fx:id="categoriaArticulo" prefWidth="75.0" text="Categoria" />
+								<TableColumn fx:id="fechaPrestamo" prefWidth="75.0" text="Fecha de prestamo" />
+								<TableColumn fx:id="grupoYTurno" prefWidth="75.0" text="Grupo Y Turno" />
+								<TableColumn fx:id="fechaDeEntrega" prefWidth="75.0" text="Fecha de entrega" />
+								<TableColumn fx:id="fechaNombrePrefecto" prefWidth="75.0" text="Nombre del Prefecto" />
 							</columns>
 						</TableView>
 					</children>
 				</AnchorPane>
 			</items>
 		</SplitPane>
-		<JFXDrawer id="sideBar" fx:id="sideBar" layoutY="50.0"
-			prefHeight="460.0" prefWidth="130.0" scaleZ="0.0" stylesheets="@mainFrame.css"
-			AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="50.0" />
+		<JFXDrawer id="sideBar" fx:id="sideBar" layoutY="50.0" prefHeight="460.0" prefWidth="130.0" scaleZ="0.0" stylesheets="@mainFrame.css" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="50.0" />
 	</children>
 </AnchorPane>
