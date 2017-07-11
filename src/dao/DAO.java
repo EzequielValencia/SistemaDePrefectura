@@ -7,7 +7,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
 
+import pojos.Alumno;
 import pojos.Articulo;
+import pojos.Persona;
+import pojos.Profesor;
 import pojos.Usuario;
 
 
@@ -38,7 +41,12 @@ public class DAO {
 		}
 		return false;
 	}
-
+	/**
+	 * 
+	 * @param usuario
+	 * @param password
+	 * @return
+	 */
 	public static Vector<Usuario> verificaUsuario(String usuario,String password){
 		ResultSet resultadoConsulta;
 		String query ="SELECT"
@@ -85,14 +93,14 @@ public class DAO {
 		ResultSet resultadoConsulta;
 		Articulo articuloEncontrado=null;
 		String query = 
-				"SELECT categoria_articulo.nombre AS categoria,"
+				"SELECT "
+				+ "articulo.nombre_articulo AS nombre,"
+				+"articulo.categoria AS categoria,"
 				+ "articulo.codigo as codigo, "
 				+ "articulo.descripcion as descripcion, "
 				+ "articulo.id as idArticulo, "
 				+ "articulo.imagen as localizacionImagen "
-				+ "FROM articulo 	"
-				+ "INNER JOIN "
-				+ "categoria_articulo on categoria_articulo.id = articulo.categoria "
+				+ "FROM articulo "
 				+ "WHERE articulo.codigo = ?";
 		PreparedStatement comando;
 		try {
@@ -101,9 +109,12 @@ public class DAO {
 			resultadoConsulta = comando.executeQuery();
 			while( resultadoConsulta.next() ){
 				
-				articuloEncontrado = new Articulo(resultadoConsulta.getString("categoria"), resultadoConsulta.getString("codigo"),
+				articuloEncontrado = new Articulo(resultadoConsulta.getString("nombre"),
+						resultadoConsulta.getString("categoria")
+						, resultadoConsulta.getString("codigo"),
 						resultadoConsulta.getString("descripcion"),resultadoConsulta.getInt("idArticulo"),
-						resultadoConsulta.getString("localizacionImagen"));
+						resultadoConsulta.getString("localizacionImagen")
+						);
 				
 			}
 			return articuloEncontrado;
@@ -114,5 +125,107 @@ public class DAO {
 
 
 		return null;
+	}
+	
+	/**
+	 * Busca a un alumno en la base de datos y lo retorna de encontrarlo
+	 * @param codigo Codigo del alumno a buscar
+	 * @return Alumno encontrado o null si no encuentra.
+	 */
+	public static Alumno buscaAlumno(String codigo){
+		Alumno alumno=null;
+		PreparedStatement comando;
+		ResultSet resultadoConsulta;
+		String query = "SELECT "
+				+ "nombre as nombre,"
+				+ "apellido_paterno as apellidoPaterno,"
+				+ "apellido_materno as apellidoMaterno,"
+				+ "codigo as codigo,"
+				+ "id as id,"
+				+ "grado as grado,"
+				+ "grupo as grupo,"
+				+ "turno as turno "
+				+ "FROM "
+				+ "alumnos "
+				+ "WHERE "
+				+ "codigo = ?";
+		
+		try {
+			comando = conexion.prepareStatement(query);
+			comando.setString(1,codigo);
+			resultadoConsulta = comando.executeQuery();
+			
+			while(resultadoConsulta.next()){
+				alumno= new Alumno(resultadoConsulta.getString("nombre"),
+						resultadoConsulta.getString("apellidoPaterno"),
+						resultadoConsulta.getString("apellidoMaterno"),
+						resultadoConsulta.getString("codigo"),
+						resultadoConsulta.getInt("id"),
+						resultadoConsulta.getString("grupo"),
+						resultadoConsulta.getString("turno"),
+						resultadoConsulta.getString("grado"));
+			}
+			return alumno;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return alumno;
+	}
+	
+	/**
+	 * 
+	 * @param codigo
+	 * @return
+	 */
+	public static Profesor buscaProfesor(String codigo){
+		Profesor profesor = null;
+		ResultSet resultadoConsulta;
+		PreparedStatement comando;
+		String query = "SELECT "
+				+ "id,"
+				+ "nombre,"
+				+ "apellido_paterno,"
+				+ "apellido_materno,"
+				+ "codigo "
+				+ "FROM "
+				+ "profesor "
+				+ "WHERE "
+				+ "codigo = ?";
+		try {
+			comando = conexion.prepareStatement(query);
+			comando.setString(1,codigo);
+			resultadoConsulta = comando.executeQuery();
+			
+			while(resultadoConsulta.next()){
+				profesor= new Profesor(resultadoConsulta.getString("nombre"),
+						resultadoConsulta.getString("apellido_paterno"),
+						resultadoConsulta.getString("apellido_materno"),
+						resultadoConsulta.getString("codigo"),
+						resultadoConsulta.getInt("id"));
+			}
+			return profesor;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return profesor;
+	}
+	
+	/**
+	 * 
+	 * @param codigo
+	 * @return
+	 */
+	public static Persona buscaSolicitante(String codigo){
+		Persona solicitante=null;
+		if((solicitante = buscaAlumno(codigo))!=null){
+			System.out.println("Alumno "+solicitante.getNombreCompleto());
+			return solicitante;
+		}else if((solicitante=buscaProfesor(codigo))!=null){
+			System.out.println("Profesor "+solicitante.getNombreCompleto());
+			return solicitante;
+		}
+		return solicitante;
 	}
 }

@@ -7,12 +7,12 @@ import java.util.ResourceBundle;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
-import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.transitions.hamburger.HamburgerBackArrowBasicTransition;
 
 import dao.DAO;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -21,12 +21,16 @@ import javafx.scene.control.Label;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import pojos.Alumno;
 import pojos.Articulo;
+import pojos.Persona;
+import pojos.Profesor;
 
 public class MainFrameController implements Initializable{
 
@@ -34,20 +38,24 @@ public class MainFrameController implements Initializable{
 	@FXML private Pane seccionCreacionDeExamenes;
 	@FXML private SplitPane seccionCreacionDePrestamos;
 	@FXML private JFXHamburger menuAmburguesa;
-	@FXML private TableView<String> tablaPrestamos;
-	@FXML private JFXListView<Articulo> listaArticulosPrestados;
+	@FXML private TableView<Articulo> tablaPrestamos;
 	@FXML private JFXTextArea areaDescripcionArticulo;
-	@FXML private JFXTextField textNombreArticulo,textCodigoArticulo;
-	@FXML private JFXButton botonBuscarArticulo;
+	@FXML private JFXTextField textNombreArticulo,textCodigoArticulo,textCodigoSolicitante,textGrado,
+	textGrupo,textTurno,textNombreSolicitante;
+	@FXML private JFXButton botonBuscarArticulo,botonAgregarALista,botonEliminarDeLista,botonBuscarAlumno;
 	@FXML private ImageView imagenArticulo;
-	@FXML private Label etiquetaBorrarTodo;
+	@FXML private Label etiquetaBorrarTodo,etiquetaBorrarSolicitante;
 	
 	public static JFXDrawer sideBarVista;
 	public static Pane seccionExamenes;
 	public static SplitPane seccionPrestamosVista;
-	
+	private Articulo articuloEncontrado;
+	private ObservableList<Articulo> listaArticulos;
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		listaArticulos = FXCollections.observableArrayList();
+		
+		tablaPrestamos.setItems(listaArticulos);
 		seccionExamenes = seccionCreacionDeExamenes;
 		seccionPrestamosVista = seccionCreacionDePrestamos;
 		sideBarVista = sideBar;
@@ -69,36 +77,79 @@ public class MainFrameController implements Initializable{
 
 	private void agregarAccionesABotonesPrestamos(){
 		botonBuscarArticulo.setOnAction(e->buscarArticulo());
-		etiquetaBorrarTodo.setOnMouseClicked(e->borrarCampos());
+		etiquetaBorrarSolicitante.setOnMouseClicked(e->borrarCamposSolicitante());
+		etiquetaBorrarTodo.setOnMouseClicked(e->borrarCamposArticulo());
+		botonAgregarALista.setOnAction(e->agregarATablaArticulo());
+		botonBuscarAlumno.setOnAction(e->buscarSolicitante());
 	}
 	
 	
-	private void borrarCampos(){
+	private void borrarCamposArticulo(){
 		textNombreArticulo.setText("");
 		areaDescripcionArticulo.setText("");
 		textCodigoArticulo.setText("");
 	}
 	
+	private void borrarCamposSolicitante(){
+		textNombreSolicitante.setText("");
+		textGrado.setText("");
+		textGrupo.setText("");
+		textTurno.setText("");
+		textCodigoSolicitante.setText("");
+	}
+	
+	@SuppressWarnings("unchecked")
+	private void agregarATablaArticulo(){
+		TableColumn<Articulo, String> columnaNombreArticulo = ((TableColumn<Articulo, String>) tablaPrestamos.getColumns().get(1)); 
+		TableColumn<Articulo,String > columnaCategoria = ((TableColumn<Articulo,String>) tablaPrestamos.getColumns().get(3));
+		listaArticulos.add(articuloEncontrado);
+		columnaCategoria.setCellValueFactory(new PropertyValueFactory<Articulo,String>("categoria"));
+		columnaNombreArticulo.setCellValueFactory(new PropertyValueFactory<Articulo,String>("nombre"));
+	}
+	
+	
 	private void buscarArticulo(){
 		String codigoArticulo = textCodigoArticulo.getText();
-		Articulo articulo=DAO.consultarArticulo(codigoArticulo);
-		if(!articulo.equals(null)){
-			textNombreArticulo.setText(articulo.getCategoria());
-			areaDescripcionArticulo.setText(articulo.getDescripcion());
-			imagenArticulo.setImage(new Image( "file:/"+articulo.getUrlImagen() ));
+		articuloEncontrado =DAO.consultarArticulo(codigoArticulo);
+		if(!articuloEncontrado.equals(null)){
+			textNombreArticulo.setText(articuloEncontrado.getNombre());
+			areaDescripcionArticulo.setText(articuloEncontrado.getDescripcion());
+			imagenArticulo.setImage(new Image( "file:/"+articuloEncontrado.getUrlImagen() ));
 			System.out.println(imagenArticulo.getImage());
 		}else{
 			
 		}
 	}
 	
+	
+	private void buscarSolicitante(){
+		Persona solicitante = DAO.buscaSolicitante(textCodigoSolicitante.getText());
+		Alumno alumnoSolicitante = null;
+		Profesor profesorSoliciante = null;
+		if(!solicitante.equals(null)){
+			textNombreSolicitante.setText(solicitante.getNombreCompleto());
+			if(solicitante instanceof Alumno){
+				alumnoSolicitante = (Alumno)solicitante;
+				textGrado.setText(alumnoSolicitante.getGrado());
+				textGrupo.setText(alumnoSolicitante.getGrupo());
+				textTurno.setText(alumnoSolicitante.getTurno());
+			}else{
+				profesorSoliciante = (Profesor)solicitante;
+				textGrado.setText("");
+				textGrupo.setText("");
+				textTurno.setText("");
+			}
+		}
+	}
+	
 	private void configurarColumnasTabla(){
 		tablaPrestamos.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-		ObservableList<TableColumn<String , ?>> columnas = tablaPrestamos.getColumns();
+		ObservableList<TableColumn<Articulo, ?>> columnas = tablaPrestamos.getColumns();
 		int cantidadColumnas = columnas.size();
 		
 		for(int i=0;i<cantidadColumnas;i++){
 			columnas.get(i).setMaxWidth(1f * Integer.MAX_VALUE*(100/cantidadColumnas));
+			columnas.get(i).setSortable(false);
 		}
 	}
 	
@@ -114,10 +165,10 @@ public class MainFrameController implements Initializable{
 			transition.play();
 			
 			if(sideBar.isShown()){
-			
+				sideBar.setScaleZ(0);
 				sideBar.close();
 			}else{
-				
+				sideBar.setScaleZ(1);
 				sideBar.open();
 
 			}

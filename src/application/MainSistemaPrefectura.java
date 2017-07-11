@@ -33,7 +33,7 @@ public class MainSistemaPrefectura extends Application {
 	
 	public static void main(String[] args) {
 		boolean seConecto = DAO.conectarDB();
-		System.out.println(seConecto);
+	
 		if(seConecto){
 			launch(args);
 		}else{

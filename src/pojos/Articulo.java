@@ -1,15 +1,22 @@
 package pojos;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 public class Articulo {
-	private String categoria;
-	private String codigo;
-	private String descripcion;
-	private int id;
+	private StringProperty categoria = new SimpleStringProperty();
+	private StringProperty nombre = new SimpleStringProperty();
+	private StringProperty codigo = new SimpleStringProperty();
+	private StringProperty descripcion = new SimpleStringProperty();
+	private IntegerProperty id = new SimpleIntegerProperty();
 	private String urlImagen;
 	
-	public Articulo(String categoria, String codigo, String descripcion, int id, String urlImagen) {
-		
+	public Articulo(String nombre, String categoria, String codigo, String descripcion, int id, String urlImagen) {
 		setCategoria(categoria);
+		setNombre(nombre);
+		
 		setCodigo(codigo);
 		setDescripcion(descripcion);
 		setId(id);
@@ -17,36 +24,44 @@ public class Articulo {
 	
 	}
 
+	public String getNombre(){
+		return nombre.get();
+	}
+	
+	public void setNombre(String nombre){
+		this.nombre.set(nombre);
+	}
+	
 	public String getCategoria() {
-		return categoria;
+		return categoria.get();
 	}
 	
 	public void setCategoria(String categoria) {
-		this.categoria = categoria;
+		this.categoria.set(categoria);
 	}
 	
 	public String getCodigo() {
-		return codigo;
+		return codigo.get();
 	}
 	
 	public void setCodigo(String codigo) {
-		this.codigo = codigo;
+		this.codigo.set( codigo );
 	}
 	
 	public String getDescripcion() {
-		return descripcion;
+		return descripcion.get();
 	}
 	
 	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
+		this.descripcion.set(descripcion);
 	}
 	
 	public int getId() {
-		return id;
+		return id.get();
 	}
 	
 	public void setId(int id) {
-		this.id = id;
+		this.id.set( id );
 	}
 	
 	public String getUrlImagen() {
