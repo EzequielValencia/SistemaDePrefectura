@@ -1,4 +1,4 @@
-package chat;
+package controllers;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;

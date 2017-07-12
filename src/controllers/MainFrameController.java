@@ -33,7 +33,12 @@ import pojos.Articulo;
 import pojos.Persona;
 import pojos.Prestamo;
 import pojos.Profesor;
-
+/**
+ * 
+ * MainFrameController.
+ * 
+ * Controla la ventana principal del proyecto
+ */
 public class MainFrameController implements Initializable{
 
 	@FXML private JFXDrawer sideBar;
@@ -56,6 +61,10 @@ public class MainFrameController implements Initializable{
 	private Prestamo prestamoGenerado;
 	private ObservableList<Prestamo> listaArticulos;
 	@Override
+	/**
+	 * Metodo que se utiliza una vez se carga la ventana para inicializar componentes y 
+	 * acctiones a los botones
+	 */
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		listaArticulos = FXCollections.observableArrayList();
 		solicitante = null;
@@ -79,7 +88,9 @@ public class MainFrameController implements Initializable{
 		configurarColumnasTabla();
 		agregarAccionesABotonesPrestamos();
 	}
-
+	/**
+	 * Metodo para agregar las acciones a los botones
+	 */
 	private void agregarAccionesABotonesPrestamos(){
 		botonBuscarArticulo.setOnAction(e->buscarArticulo());
 		etiquetaBorrarSolicitante.setOnMouseClicked(e->borrarCamposSolicitante());
@@ -88,13 +99,19 @@ public class MainFrameController implements Initializable{
 		botonBuscarAlumno.setOnAction(e->buscarSolicitante());
 	}
 	
-	
+	/**
+	 * Borra los cambpos del articulo poniendoles 
+	 * caracter nulo como texto
+	 */
 	private void borrarCamposArticulo(){
 		textNombreArticulo.setText("");
 		areaDescripcionArticulo.setText("");
 		textCodigoArticulo.setText("");
 	}
-	
+	/**
+	 * Borra los campos de el solicitante poniendoles
+	 * caracter nulo como texto
+	 */
 	private void borrarCamposSolicitante(){
 		textNombreSolicitante.setText("");
 		textGrado.setText("");
@@ -102,7 +119,10 @@ public class MainFrameController implements Initializable{
 		textTurno.setText("");
 		textCodigoSolicitante.setText("");
 	}
-	
+	/**
+	 * Genera el prestamos para poder ser añadido a la base de datos y a la tabla 
+	 * de la vista
+	 */
 	private void generarPrestamo(){
 		Timestamp fechaPrestamo = new Timestamp(new java.util.Date().getTime());
 		String grupo="";
@@ -119,6 +139,9 @@ public class MainFrameController implements Initializable{
 	}
 	
 	@SuppressWarnings("unchecked")
+	/**
+	 * Agrega el prestamo a la tabla de prestamos
+	 */
 	private void agregarATablaArticulo(){
 		TableColumn<Prestamo, String> columnaNombreSolicitante = ((TableColumn<Prestamo, String>) tablaPrestamos.getColumns().get(0));
 		TableColumn<Prestamo, String> columnaNombreArticulo = ((TableColumn<Prestamo, String>) tablaPrestamos.getColumns().get(1)); 
@@ -139,7 +162,9 @@ public class MainFrameController implements Initializable{
 
 	}
 	
-	
+	/**
+	 * Metodo para buscar el articulo.
+	 */
 	private void buscarArticulo(){
 		String codigoArticulo = textCodigoArticulo.getText();
 		articuloEncontrado =DAO.consultarArticulo(codigoArticulo);
@@ -153,7 +178,9 @@ public class MainFrameController implements Initializable{
 		}
 	}
 	
-	
+	/**
+	 * Metodo que manda a buscar el solicitante mediante el codigo ingresado.
+	 */
 	private void buscarSolicitante(){
 		Alumno alumnoSolicitante = null;
 		Profesor profesorSoliciante = null;
@@ -173,7 +200,11 @@ public class MainFrameController implements Initializable{
 			}
 		}
 	}
-	
+	/**
+	 * Configura el tamaño de todas las columnas que tiene la tabla
+	 * para que puedan ser redimencionadas y ocupen el mismo porcentaje
+	 * de ancho al momento de que la ventana se redimenciona.
+	 */
 	private void configurarColumnasTabla(){
 		tablaPrestamos.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 		ObservableList<TableColumn<Prestamo, ?>> columnas = tablaPrestamos.getColumns();
@@ -183,7 +214,9 @@ public class MainFrameController implements Initializable{
 			columnas.get(i).setMaxWidth(1f * Integer.MAX_VALUE*(100/cantidadColumnas));
 		}
 	}
-	
+	/**
+	 * Transforma el boton de "hamburguesa" en una flecha al ser presionado.
+	 */
 	private void transformacionAFlecha() {
 		// TODO Auto-generated method stub
 		

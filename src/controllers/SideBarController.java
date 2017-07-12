@@ -1,5 +1,6 @@
 package controllers;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -9,7 +10,9 @@ import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -20,7 +23,11 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
-
+/**
+ * 
+ * SideBarController
+ * Clase que controla la barra lateral del sistema
+ */
 public class SideBarController implements Initializable{
 	@FXML
 	private ImageView imagenUsuario;
@@ -36,36 +43,60 @@ public class SideBarController implements Initializable{
 	private JFXButton botonSalir;
 	
 
-
-	//private GridPane seccionPrestamos;
-
 	@Override
+	/**
+	 * initalize
+	 * Metodo para inicializar el Controlador.
+	 * 
+	 */
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
 		Image image = new Image("/images/avatar.png");
 		imagenUsuario.setImage(image);
 		agregarAcionesABotones();
-		crearSeccionPrestamos();
-	}
-
-	private void crearSeccionPrestamos(){
 		
 	}
 
+	/**
+	 * Metodo para agregar la funcionalidad a los botones de la barra lateral
+	 */
 	private void agregarAcionesABotones(){
 		botonSalir.setOnAction(e->System.exit(0));
 		botonRegistroPrestamos.setOnAction(e->abrirVistaPrestamos());
 		botonCreacionDeExamenes.setOnAction(e->abrirVistaExamenes());
+		botonAsistenciaProfesores.setOnAction(e->abrirRelojChecador());
 		botonChat.setOnAction(e->{Toast.makeText(((Stage)botonChat.getScene().getWindow()), "Mensaje de prueba", 3500, 500, 500);});
 	}
-	
+	/**
+	 * Metodo que abre la ventana del reloj checador
+	 */
+	private void abrirRelojChecador(){
+		Stage relojchecador = new Stage();
+		Parent root;
+		Scene scene;
+		try {
+			root = FXMLLoader.load(getClass().getResource("/view/registroAsistenciaProfesores.fxml"));
+			scene = new Scene(root,600,400);
+			relojchecador.setScene(scene);
+			relojchecador.show();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	/**
+	 * Metodo que abre la vista de creacion de examenes
+	 */
 	private void abrirVistaExamenes(){
 		
 		MainFrameController.seccionExamenes.setVisible(true);
 		MainFrameController.seccionPrestamosVista.setVisible(false);
 		MainFrameController.sideBarVista.close();
 	}
-	
+	/**
+	 * Metodo que abre la vista del sistema de prestamos
+	 */
 	private void abrirVistaPrestamos(){
 		
 		MainFrameController.seccionExamenes.setVisible(false);
@@ -75,8 +106,7 @@ public class SideBarController implements Initializable{
 }
 
 
- final class Toast
-{
+ final class Toast{
     public static void makeText(Stage ownerStage, String toastMsg, int toastDelay, int fadeInDelay, int fadeOutDelay)
     {
         Stage toastStage=new Stage();

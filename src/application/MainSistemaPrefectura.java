@@ -12,6 +12,9 @@ import javafx.stage.Stage;
 
 
 public class MainSistemaPrefectura extends Application {
+	/**
+	 * Lanza la ventana del login.
+	 */
 	@Override
 	public void start(Stage primaryStage) {
 		
@@ -30,7 +33,10 @@ public class MainSistemaPrefectura extends Application {
 			e.printStackTrace();
 		}
 	}
-	
+	/**
+	 * Metodo para correr el programa
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		boolean seConecto = DAO.conectarDB();
 	

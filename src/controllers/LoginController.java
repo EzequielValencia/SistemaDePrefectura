@@ -41,22 +41,28 @@ public class LoginController implements Initializable {
 				verificaUsuario();
 		});
 	}
-	
+	/**
+	 * Cierra la ventana y termina el programa
+	 */
 	private void cerrarLogin(){
 		Stage escenarioActual =(Stage) botonCerrar.getScene().getWindow();
 		escenarioActual.close();
 	}
-	
+	/**
+	 * Verifica la existencia del usuario y la contrase~a del usuario
+	 */
 	private void verificaUsuario(){
 		Vector<Usuario> usuarios = DAO.verificaUsuario(textUsuario.getText(), textPassword.getText());
 		if(usuarios.size()==1){
 			abreVentanaPricipal();
 		}else{
-			labelMensaje.setText("Verifique su usuario y contreseña");
+			labelMensaje.setText("Verifique su usuario y contrase~a");
 			labelMensaje.setStyle("-fx-text-fill:#c21818;");
 		}
 	}
-	
+	/**
+	 * Abre la ventana principal del sistema
+	 */
 	private void abreVentanaPricipal(){
 		Stage esenarioActual;
 		Parent root;
