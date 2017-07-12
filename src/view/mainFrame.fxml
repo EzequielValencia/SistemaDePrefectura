@@ -34,7 +34,7 @@
 							<children>
 								<JFXTextField fx:id="textNombreArticulo" labelFloat="true" layoutX="20.0" layoutY="102.0" prefHeight="25.0" prefWidth="194.0" promptText="Nombre Articulo" />
 								<JFXTextArea fx:id="areaDescripcionArticulo" labelFloat="true" layoutX="17.0" layoutY="154.0" prefHeight="41.0" prefWidth="205.0" promptText="Descripción" />
-								<ImageView fx:id="imagenArticulo" fitHeight="116.0" fitWidth="138.0" layoutX="222.0" layoutY="66.0" pickOnBounds="true" />
+								<ImageView fx:id="imagenArticulo" fitHeight="116.0" fitWidth="138.0" layoutX="232.0" layoutY="96.0" pickOnBounds="true" />
 								<JFXButton fx:id="botonAgregarALista" layoutX="20.0" layoutY="478.0" prefHeight="25.0" prefWidth="106.0" text="Agregar a lista">
 									<cursor>
 										<Cursor fx:constant="HAND" />
@@ -45,7 +45,7 @@
 										<Cursor fx:constant="HAND" />
 									</cursor>
 								</JFXButton>
-								<JFXButton fx:id="botonBuscarArticulo" layoutX="256.0" layoutY="46.0" prefHeight="41.0" prefWidth="92.0" text="Buscar &#10;articulo" textAlignment="CENTER">
+								<JFXButton fx:id="botonBuscarArticulo" layoutX="272.0" layoutY="46.0" prefHeight="41.0" prefWidth="92.0" text="Buscar &#10;articulo" textAlignment="CENTER">
 									<cursor>
 										<Cursor fx:constant="HAND" />
 									</cursor>
@@ -66,7 +66,7 @@
 										<Cursor fx:constant="HAND" />
 									</cursor>
 								</Label>
-								<JFXButton fx:id="botonBuscarAlumno" layoutX="255.0" layoutY="257.0" prefHeight="41.0" prefWidth="92.0" text="Buscar&#10;Alumno" textAlignment="CENTER" />
+								<JFXButton fx:id="botonBuscarAlumno" layoutX="255.0" layoutY="257.0" prefHeight="41.0" prefWidth="92.0" text="Buscar&#10;Soliciante" textAlignment="CENTER" />
 								<Label layoutX="14.0" layoutY="14.0" prefHeight="17.0" prefWidth="334.0" text="Articulo">
 									<font>
 										<Font size="18.0" />
@@ -85,14 +85,13 @@
 					<children>
 						<TableView fx:id="tablaPrestamos" layoutY="69.0" prefHeight="485.0" prefWidth="714.0" styleClass="bordered" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="69.0">
 							<columns>
-								<TableColumn fx:id="nombreSolicitante" prefWidth="95.0" text="Nombre del Solicitante" />
-								<TableColumn fx:id="nombreArticulo" prefWidth="75.0" text="Nombre del articulo" />
-								<TableColumn fx:id="numeroDeSerie" prefWidth="55.0" text="Numero de serie" />
-								<TableColumn fx:id="categoriaArticulo" prefWidth="75.0" text="Categoria" />
-								<TableColumn fx:id="fechaPrestamo" prefWidth="75.0" text="Fecha de prestamo" />
-								<TableColumn fx:id="grupoYTurno" prefWidth="75.0" text="Grupo Y Turno" />
-								<TableColumn fx:id="fechaDeEntrega" prefWidth="75.0" text="Fecha de entrega" />
-								<TableColumn fx:id="fechaNombrePrefecto" prefWidth="75.0" text="Nombre del Prefecto" />
+								<TableColumn fx:id="columnaNombreSolicitante" prefWidth="95.0" text="Nombre del Solicitante" />
+								<TableColumn fx:id="columnaNombreArticulo" prefWidth="75.0" text="Nombre del articulo" />
+								<TableColumn fx:id="columnaCategoriaArticulo" prefWidth="75.0" text="Categoria" />
+								<TableColumn fx:id="columnaFechaPrestamo" prefWidth="75.0" text="Fecha de prestamo" />
+								<TableColumn fx:id="columnaGrupoYTurno" prefWidth="75.0" text="Grupo Y Turno" />
+								<TableColumn fx:id="columnaFechaDeEntrega" prefWidth="75.0" text="Fecha de entrega" />
+								<TableColumn fx:id="columnaFechaNombrePrefecto" prefWidth="75.0" text="Nombre del Prefecto" />
 							</columns>
 						</TableView>
 					</children>

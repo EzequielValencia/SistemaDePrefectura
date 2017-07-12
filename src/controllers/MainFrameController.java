@@ -2,6 +2,7 @@ package controllers;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Timestamp;
 import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXButton;
@@ -30,6 +31,7 @@ import javafx.scene.layout.VBox;
 import pojos.Alumno;
 import pojos.Articulo;
 import pojos.Persona;
+import pojos.Prestamo;
 import pojos.Profesor;
 
 public class MainFrameController implements Initializable{
@@ -38,7 +40,7 @@ public class MainFrameController implements Initializable{
 	@FXML private Pane seccionCreacionDeExamenes;
 	@FXML private SplitPane seccionCreacionDePrestamos;
 	@FXML private JFXHamburger menuAmburguesa;
-	@FXML private TableView<Articulo> tablaPrestamos;
+	@FXML private TableView<Prestamo> tablaPrestamos;
 	@FXML private JFXTextArea areaDescripcionArticulo;
 	@FXML private JFXTextField textNombreArticulo,textCodigoArticulo,textCodigoSolicitante,textGrado,
 	textGrupo,textTurno,textNombreSolicitante;
@@ -50,11 +52,14 @@ public class MainFrameController implements Initializable{
 	public static Pane seccionExamenes;
 	public static SplitPane seccionPrestamosVista;
 	private Articulo articuloEncontrado;
-	private ObservableList<Articulo> listaArticulos;
+	private Persona solicitante;
+	private Prestamo prestamoGenerado;
+	private ObservableList<Prestamo> listaArticulos;
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		listaArticulos = FXCollections.observableArrayList();
-		
+		solicitante = null;
+		articuloEncontrado = null;
 		tablaPrestamos.setItems(listaArticulos);
 		seccionExamenes = seccionCreacionDeExamenes;
 		seccionPrestamosVista = seccionCreacionDePrestamos;
@@ -98,13 +103,40 @@ public class MainFrameController implements Initializable{
 		textCodigoSolicitante.setText("");
 	}
 	
+	private void generarPrestamo(){
+		Timestamp fechaPrestamo = new Timestamp(new java.util.Date().getTime());
+		String grupo="";
+		
+		if(solicitante instanceof Alumno){
+			grupo = ((Alumno)solicitante).getGrado()+' '+((Alumno)solicitante).getGrupo();
+		}
+		System.out.println(articuloEncontrado.getCategoria());
+		prestamoGenerado = new Prestamo(articuloEncontrado.getNombre(), 
+				articuloEncontrado.getCategoria(),
+				fechaPrestamo.toString(), ""
+				,grupo,
+				solicitante.getNombreCompleto());
+	}
+	
 	@SuppressWarnings("unchecked")
 	private void agregarATablaArticulo(){
-		TableColumn<Articulo, String> columnaNombreArticulo = ((TableColumn<Articulo, String>) tablaPrestamos.getColumns().get(1)); 
-		TableColumn<Articulo,String > columnaCategoria = ((TableColumn<Articulo,String>) tablaPrestamos.getColumns().get(3));
-		listaArticulos.add(articuloEncontrado);
-		columnaCategoria.setCellValueFactory(new PropertyValueFactory<Articulo,String>("categoria"));
-		columnaNombreArticulo.setCellValueFactory(new PropertyValueFactory<Articulo,String>("nombre"));
+		TableColumn<Prestamo, String> columnaNombreSolicitante = ((TableColumn<Prestamo, String>) tablaPrestamos.getColumns().get(0));
+		TableColumn<Prestamo, String> columnaNombreArticulo = ((TableColumn<Prestamo, String>) tablaPrestamos.getColumns().get(1)); 
+		TableColumn<Prestamo,String > columnaCategoria = ((TableColumn<Prestamo,String>) tablaPrestamos.getColumns().get(2));
+		TableColumn<Prestamo,String > columnaFechaPrestamo = ((TableColumn<Prestamo,String>) tablaPrestamos.getColumns().get(3));
+		TableColumn<Prestamo, String> columnaGrupo = ((TableColumn<Prestamo, String>) tablaPrestamos.getColumns().get(4));
+		TableColumn<Prestamo, String> columnaNombrePrefecto = ((TableColumn<Prestamo, String>) tablaPrestamos.getColumns().get(6));
+		if(!articuloEncontrado.equals(null) && !solicitante.equals(null)){
+			generarPrestamo();
+			listaArticulos.add(prestamoGenerado);
+			columnaNombreSolicitante.setCellValueFactory(new PropertyValueFactory<Prestamo,String>("nombreSolicitante"));
+			columnaNombreArticulo.setCellValueFactory(new PropertyValueFactory<Prestamo,String>("nombreArticulo"));
+			columnaCategoria.setCellValueFactory(new PropertyValueFactory<Prestamo,String>("categoriaArticulo"));
+			columnaFechaPrestamo.setCellValueFactory(new PropertyValueFactory<Prestamo,String>("fechaPrestamo"));
+			columnaGrupo.setCellValueFactory(new PropertyValueFactory<Prestamo,String>("grupoRegistrado"));
+			columnaNombrePrefecto.setCellValueFactory(new PropertyValueFactory<Prestamo,String>("nombrePrefecto"));
+		}
+
 	}
 	
 	
@@ -123,9 +155,9 @@ public class MainFrameController implements Initializable{
 	
 	
 	private void buscarSolicitante(){
-		Persona solicitante = DAO.buscaSolicitante(textCodigoSolicitante.getText());
 		Alumno alumnoSolicitante = null;
 		Profesor profesorSoliciante = null;
+		solicitante = DAO.buscaSolicitante(textCodigoSolicitante.getText());
 		if(!solicitante.equals(null)){
 			textNombreSolicitante.setText(solicitante.getNombreCompleto());
 			if(solicitante instanceof Alumno){
@@ -144,12 +176,11 @@ public class MainFrameController implements Initializable{
 	
 	private void configurarColumnasTabla(){
 		tablaPrestamos.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-		ObservableList<TableColumn<Articulo, ?>> columnas = tablaPrestamos.getColumns();
+		ObservableList<TableColumn<Prestamo, ?>> columnas = tablaPrestamos.getColumns();
 		int cantidadColumnas = columnas.size();
 		
 		for(int i=0;i<cantidadColumnas;i++){
 			columnas.get(i).setMaxWidth(1f * Integer.MAX_VALUE*(100/cantidadColumnas));
-			columnas.get(i).setSortable(false);
 		}
 	}
 	

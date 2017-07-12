@@ -26,7 +26,7 @@ public class DAO {
 	public static boolean conectarDB(){
 		String servidor = "jdbc:mysql://localhost:3306/sistemaprefectura";
 		String usuario = "root";
-		String password = "";
+		String password = "root";
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			conexion = DriverManager.getConnection(servidor,usuario,password);
