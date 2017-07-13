@@ -32,8 +32,8 @@
 					<children>
 						<Pane prefHeight="549.0" prefWidth="371.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 							<children>
-								<JFXTextField fx:id="textNombreArticulo" labelFloat="true" layoutX="20.0" layoutY="102.0" prefHeight="25.0" prefWidth="194.0" promptText="Nombre Articulo" />
-								<JFXTextArea fx:id="areaDescripcionArticulo" labelFloat="true" layoutX="17.0" layoutY="154.0" prefHeight="41.0" prefWidth="205.0" promptText="Descripción" />
+								<JFXTextField fx:id="textNombreArticulo" focusTraversable="false" labelFloat="true" layoutX="20.0" layoutY="102.0" prefHeight="25.0" prefWidth="194.0" promptText="Nombre Articulo" />
+								<JFXTextArea fx:id="areaDescripcionArticulo" focusTraversable="false" labelFloat="true" layoutX="17.0" layoutY="154.0" prefHeight="41.0" prefWidth="205.0" promptText="Descripción" />
 								<ImageView fx:id="imagenArticulo" fitHeight="116.0" fitWidth="138.0" layoutX="232.0" layoutY="96.0" pickOnBounds="true" />
 								<JFXButton fx:id="botonAgregarALista" layoutX="20.0" layoutY="478.0" prefHeight="25.0" prefWidth="106.0" text="Agregar a lista">
 									<cursor>
@@ -55,12 +55,12 @@
 										<Cursor fx:constant="HAND" />
 									</cursor>
 								</Label>
-								<JFXTextField fx:id="textCodigoArticulo" labelFloat="true" layoutX="20.0" layoutY="55.0" prefHeight="25.0" prefWidth="148.0" promptText="Codigo articulo" />
-								<JFXTextField fx:id="textCodigoSolicitante" labelFloat="true" layoutX="20.0" layoutY="276.0" prefHeight="25.0" prefWidth="118.0" promptText="Codigo Solicitante" />
-								<JFXTextField fx:id="textNombreSolicitante" labelFloat="true" layoutX="20.0" layoutY="332.0" prefHeight="25.0" prefWidth="327.0" promptText="Nombre" />
-								<JFXTextField fx:id="textGrado" labelFloat="true" layoutX="17.0" layoutY="397.0" prefHeight="25.0" prefWidth="56.0" promptText="Grado" />
-								<JFXTextField fx:id="textGrupo" labelFloat="true" layoutX="94.0" layoutY="397.0" prefHeight="25.0" prefWidth="106.0" promptText="Grupo" />
-								<JFXTextField fx:id="textTurno" labelFloat="true" layoutX="214.0" layoutY="397.0" promptText="Turno" />
+								<JFXTextField fx:id="textCodigoArticulo" focusTraversable="false" labelFloat="true" layoutX="20.0" layoutY="55.0" prefHeight="25.0" prefWidth="148.0" promptText="Codigo articulo" />
+								<JFXTextField fx:id="textCodigoSolicitante" focusTraversable="false" labelFloat="true" layoutX="20.0" layoutY="276.0" prefHeight="25.0" prefWidth="118.0" promptText="Codigo Solicitante" />
+								<JFXTextField fx:id="textNombreSolicitante" focusTraversable="false" labelFloat="true" layoutX="20.0" layoutY="332.0" prefHeight="25.0" prefWidth="327.0" promptText="Nombre" />
+								<JFXTextField fx:id="textGrado" focusTraversable="false" labelFloat="true" layoutX="17.0" layoutY="397.0" prefHeight="25.0" prefWidth="56.0" promptText="Grado" />
+								<JFXTextField fx:id="textGrupo" focusTraversable="false" labelFloat="true" layoutX="94.0" layoutY="397.0" prefHeight="25.0" prefWidth="106.0" promptText="Grupo" />
+								<JFXTextField fx:id="textTurno" focusTraversable="false" labelFloat="true" layoutX="214.0" layoutY="397.0" promptText="Turno" />
 								<Label id="etiquetaBorrarTodo" fx:id="etiquetaBorrarSolicitante" layoutX="151.0" layoutY="287.0" style="-fx-font-weight: bold;" text="Borrar Todo" underline="true">
 									<cursor>
 										<Cursor fx:constant="HAND" />

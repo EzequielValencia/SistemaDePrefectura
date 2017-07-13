@@ -42,10 +42,10 @@ public class DAO {
 		return false;
 	}
 	/**
-	 * 
-	 * @param usuario
-	 * @param password
-	 * @return
+	 * Verifica la existencia del usuario en la base de datos
+	 * @param usuario que se verificara
+	 * @param password password del usuario
+	 * @return retorna un vector de usuarios
 	 */
 	public static Vector<Usuario> verificaUsuario(String usuario,String password){
 		ResultSet resultadoConsulta;
@@ -88,7 +88,11 @@ public class DAO {
 		}
 		return null;
 	}
-
+	/**
+	 * Verifica que exista el articulo en la base de datos
+	 * @param codigoArticulo Es el codigo por el que se buscara el articulo
+	 * @return Retorna null si no encuentra el articulo. De lo contrario retorna un articulo
+	 */
 	public static Articulo consultarArticulo(String codigoArticulo){
 		ResultSet resultadoConsulta;
 		Articulo articuloEncontrado=null;
@@ -174,9 +178,9 @@ public class DAO {
 	}
 	
 	/**
-	 * 
+	 * Busca al profesor por el codigo que entra como parametro
 	 * @param codigo
-	 * @return
+	 * @return null si no lo encuentra. De lo contrario regresa el profesor encontrado
 	 */
 	public static Profesor buscaProfesor(String codigo){
 		Profesor profesor = null;
@@ -213,9 +217,9 @@ public class DAO {
 	}
 	
 	/**
-	 * 
+	 * Busca a una persona por su codigo
 	 * @param codigo
-	 * @return
+	 * @return Null si este no se encuentra. De lo contrario regresa La persona localizada.
 	 */
 	public static Persona buscaSolicitante(String codigo){
 		Persona solicitante=null;
