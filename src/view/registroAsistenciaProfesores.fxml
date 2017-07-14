@@ -30,7 +30,7 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label fx:id="etiquetaReloj" contentDisplay="CENTER" focusTraversable="false" prefHeight="101.0" prefWidth="276.0" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowSpan="2">
+            <Label fx:id="etiquetaReloj" alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" prefHeight="101.0" prefWidth="276.0" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowSpan="2">
                <font>
                   <Font name="SansSerif Regular" size="42.0" />
                </font>

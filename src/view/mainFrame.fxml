@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXDatePicker?>
 <?import com.jfoenix.controls.JFXDrawer?>
 <?import com.jfoenix.controls.JFXHamburger?>
 <?import com.jfoenix.controls.JFXTextArea?>
 <?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXTimePicker?>
 <?import com.jfoenix.controls.JFXToolbar?>
+<?import javafx.geometry.Insets?>
 <?import javafx.geometry.Point3D?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
@@ -14,7 +18,10 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1024.0" stylesheets="@mainFrame.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MainFrameController">
@@ -25,8 +32,7 @@
 			</rotationAxis>
 		</JFXToolbar>
 		<JFXHamburger fx:id="menuAmburguesa" fillWidth="false" layoutX="10.0" layoutY="10.0" prefHeight="34.0" prefWidth="43.0" style="-fx-cursor: hand;" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0" />
-		<Pane fx:id="seccionCreacionDeExamenes" layoutX="10.0" layoutY="67.0" prefHeight="549.0" prefWidth="776.0" style="-fx-background-color: green;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="51.0" />
-		<SplitPane fx:id="seccionCreacionDePrestamos" dividerPositions="0.3659491193737769" layoutX="-1.0" layoutY="44.0" prefHeight="555.0" prefWidth="1024.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="44.0">
+		<SplitPane fx:id="seccionCreacionDePrestamos" dividerPositions="0.3659491193737769" layoutY="44.0" prefHeight="555.0" prefWidth="1024.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="44.0">
 			<items>
 				<AnchorPane id="panelBusqueda" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
 					<children>
@@ -98,6 +104,55 @@
 				</AnchorPane>
 			</items>
 		</SplitPane>
-		<JFXDrawer id="sideBar" fx:id="sideBar" layoutY="50.0" prefHeight="460.0" prefWidth="130.0" scaleZ="0.0" stylesheets="@mainFrame.css" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="50.0" />
+      <GridPane fx:id="seccionCreacionDeExamenes" hgap="10.0" layoutY="46.0" prefHeight="556.0" prefWidth="1024.0" vgap="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="46.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="108.0" minHeight="10.0" prefHeight="62.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="131.0" minHeight="10.0" prefHeight="54.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="128.0" minHeight="10.0" prefHeight="128.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <JFXComboBox fx:id="comboGrado" focusTraversable="false" labelFloat="true" prefHeight="26.0" prefWidth="309.0" promptText="Grado" GridPane.columnSpan="2" GridPane.rowIndex="2" />
+            <JFXComboBox fx:id="comboGrupo" focusTraversable="false" labelFloat="true" prefHeight="26.0" prefWidth="309.0" promptText="Grupo" GridPane.columnSpan="2" GridPane.rowIndex="3" />
+            <JFXComboBox fx:id="comboTurno" focusTraversable="false" labelFloat="true" prefHeight="26.0" prefWidth="213.0" promptText="Turno" GridPane.columnSpan="2" GridPane.rowIndex="4" />
+            <JFXDatePicker fx:id="selectorFecha" focusTraversable="false" prefHeight="24.0" prefWidth="309.0" promptText="Fecha examen" showWeekNumbers="true" GridPane.columnIndex="3" GridPane.columnSpan="3" GridPane.rowIndex="2" />
+            <JFXTimePicker fx:id="selectorHora" focusTraversable="false" prefHeight="24.0" prefWidth="305.0" promptText="Hora exámen" GridPane.columnIndex="8" GridPane.columnSpan="3" GridPane.rowIndex="2" />
+            <JFXComboBox fx:id="selectorMateroa" focusTraversable="false" labelFloat="true" prefHeight="26.0" prefWidth="669.0" promptText="Materia" GridPane.columnIndex="3" GridPane.columnSpan="8" GridPane.rowIndex="1" />
+            <Label prefHeight="68.0" prefWidth="856.0" text="GENERADOR DE HORARIOS PARA EXAMENES" GridPane.columnIndex="1" GridPane.columnSpan="10">
+               <font>
+                  <Font name="SansSerif Bold" size="33.0" />
+               </font>
+            </Label>
+            <JFXButton fx:id="botonBorrarCampos" prefHeight="66.0" prefWidth="273.0" text="Reiniciar campos" GridPane.columnIndex="3" GridPane.columnSpan="3" GridPane.rowIndex="3" />
+            <JFXButton fx:id="botonRegistrar" prefHeight="66.0" prefWidth="273.0" text="Ingresar" GridPane.columnIndex="8" GridPane.columnSpan="3" GridPane.rowIndex="3" />
+            <TableView prefHeight="225.0" prefWidth="74.0" GridPane.columnIndex="3" GridPane.columnSpan="8" GridPane.rowIndex="4" GridPane.rowSpan="3">
+              <columns>
+                <TableColumn prefWidth="75.0" text="C1" />
+                <TableColumn prefWidth="75.0" text="C2" />
+              </columns>
+            </TableView>
+         </children>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </GridPane>
+      <JFXDrawer id="sideBar" fx:id="sideBar" layoutX="10.0" layoutY="60.0" prefHeight="460.0" prefWidth="130.0" scaleZ="0.0" stylesheets="@mainFrame.css" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="50.0" />
 	</children>
 </AnchorPane>

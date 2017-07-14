@@ -6,6 +6,7 @@ import java.sql.Timestamp;
 import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.controls.JFXTextArea;
@@ -26,7 +27,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import pojos.Alumno;
 import pojos.Articulo;
@@ -42,7 +43,7 @@ import pojos.Profesor;
 public class MainFrameController implements Initializable{
 
 	@FXML private JFXDrawer sideBar;
-	@FXML private Pane seccionCreacionDeExamenes;
+	@FXML private GridPane seccionCreacionDeExamenes;
 	@FXML private SplitPane seccionCreacionDePrestamos;
 	@FXML private JFXHamburger menuAmburguesa;
 	@FXML private TableView<Prestamo> tablaPrestamos;
@@ -53,8 +54,15 @@ public class MainFrameController implements Initializable{
 	@FXML private ImageView imagenArticulo;
 	@FXML private Label etiquetaBorrarTodo,etiquetaBorrarSolicitante;
 	
+	@FXML private JFXComboBox<Integer> comboGrado;
+	@FXML private JFXComboBox<String> comboTurno;
+	@FXML private JFXComboBox<Character> comboGrupo;
+	@FXML private JFXButton botonBorrarCampos,botonRegistrar;
+	
+	
+	
 	public static JFXDrawer sideBarVista;
-	public static Pane seccionExamenes;
+	public static GridPane seccionExamenes;
 	public static SplitPane seccionPrestamosVista;
 	private Articulo articuloEncontrado;
 	private Persona solicitante;
@@ -87,7 +95,13 @@ public class MainFrameController implements Initializable{
 		transformacionAFlecha();
 		configurarColumnasTabla();
 		agregarAccionesABotonesPrestamos();
+		inicializaComboBoxs();
 	}
+	
+	private void inicializaComboBoxs(){
+		
+	}
+	
 	/**
 	 * Metodo para agregar las acciones a los botones
 	 */
@@ -230,9 +244,11 @@ public class MainFrameController implements Initializable{
 			
 			if(sideBar.isShown()){
 				sideBar.setScaleZ(0);
+				
 				sideBar.close();
 			}else{
 				sideBar.setScaleZ(1);
+				
 				sideBar.open();
 
 			}

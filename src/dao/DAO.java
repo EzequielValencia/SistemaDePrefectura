@@ -5,12 +5,14 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.Vector;
 
 import pojos.Alumno;
 import pojos.Articulo;
 import pojos.Persona;
 import pojos.Profesor;
+import pojos.RegistroEntradaSalida;
 import pojos.Usuario;
 
 
@@ -231,5 +233,155 @@ public class DAO {
 			return solicitante;
 		}
 		return solicitante;
+	}
+
+	public static RegistroEntradaSalida existeRegistroEntrada(String codigo){
+		PreparedStatement comando;
+		ResultSet resultadoConsulta;
+		RegistroEntradaSalida registro = null;
+		String query = "SELECT "
+				+ "registro_entrada_salida.id AS idRegistro, "
+				+ "concat(profesor.nombre,' ',profesor.apellido_paterno,"
+				+ "' ',profesor.apellido_materno) AS nombreEmpleado, "
+				+ "registro_entrada_salida.tipo_registro AS tipoRegistro, "
+				+ "registro_entrada_salida.hora_registro AS fechaRegistro "
+				+ "FROM "
+				+ "registro_entrada_salida "
+				+ "INNER JOIN "
+				+ "profesor ON profesor.codigo = registro_entrada_salida.codigo_persona_registrada "
+				+ "WHERE registro_entrada_salida.codigo_persona_registrada = ? "
+				+ "AND DATE(hora_registro) = curdate() AND tipo_registro = 'entrada'";
+		try {
+			comando = conexion.prepareStatement(query);
+			comando.setString(1, codigo);
+			resultadoConsulta = comando.executeQuery();
+			while(resultadoConsulta.next()){
+				registro = new RegistroEntradaSalida(resultadoConsulta.getString("nombreEmpleado"), 
+						resultadoConsulta.getString("tipoRegistro"), 
+						resultadoConsulta.getInt("idRegistro"), 
+						resultadoConsulta.getTimestamp("fechaRegistro").toString());
+			}
+			return registro;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return registro;
+	}
+	
+	public static RegistroEntradaSalida existeRegistroSalida(String codigo){
+		PreparedStatement comando;
+		ResultSet resultadoConsulta;
+		RegistroEntradaSalida registro = null;
+		String query = "SELECT "
+				+ "registro_entrada_salida.id AS idRegistro, "
+				+ "concat(profesor.nombre,' ',profesor.apellido_paterno,"
+				+ "' ',profesor.apellido_materno) AS nombreEmpleado, "
+				+ "registro_entrada_salida.tipo_registro AS tipoRegistro, "
+				+ "registro_entrada_salida.hora_registro AS fechaRegistro "
+				+ "FROM "
+				+ "registro_entrada_salida "
+				+ "INNER JOIN "
+				+ "profesor ON profesor.codigo = registro_entrada_salida.codigo_persona_registrada "
+				+ "WHERE registro_entrada_salida.codigo_persona_registrada = ? "
+				+ "AND DATE(hora_registro) = curdate() AND tipo_registro = 'salida'";
+		try {
+			comando = conexion.prepareStatement(query);
+			comando.setString(1, codigo);
+			resultadoConsulta = comando.executeQuery();
+			while(resultadoConsulta.next()){
+				registro = new RegistroEntradaSalida(resultadoConsulta.getString("nombreEmpleado"), 
+						resultadoConsulta.getString("tipoRegistro"), 
+						resultadoConsulta.getInt("idRegistro"), 
+						resultadoConsulta.getTimestamp("fechaRegistro").toString());
+			}
+			return registro;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return registro;
+	}
+	/**
+	 * Inserta el nuevo registro en la base de datos.
+	 * 
+	 * @param codigoProfesor codigo del profesor que esta haciendo el registro
+	 * @param tipoRegistro este puede ser "entrada" o "salida"
+	 * @param horaRegistro hora en la que  se esta efectuando el registro
+	 * @return verdadero si se puedo insertar. Falso si no lo hizo
+	 */
+	public static boolean agregarRegistroEntradaSalida(String codigoProfesor,String tipoRegistro,Timestamp horaRegistro){
+		PreparedStatement comando;
+		
+		String query = "INSERT INTO registro_entrada_salida(codigo_persona_registrada,"
+				+ "tipo_registro,hora_registro) values (?,?,?)";
+		try {
+			comando = conexion.prepareStatement(query);
+			comando.setString(1,codigoProfesor);
+			comando.setString(2,tipoRegistro);
+			comando.setTimestamp(3, horaRegistro);
+			System.out.println(comando.execute());
+			return comando.getUpdateCount()>0;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
+	}
+	/***
+	 * Esta funcion regresa los los registros de tipo. Siempre y cuando 
+	 * existan registros de este tipo en la tabla 'registro_entrada_salida'
+	 * @return vector de registros que puede o no estar vacio de acuerdo a los datos en la base de datos
+	 */
+	public static Vector<RegistroEntradaSalida> dameRegistrosEntradaSalida(){
+		Vector<RegistroEntradaSalida> vectorRegistrosEntradaSalida=new Vector<RegistroEntradaSalida>();
+		PreparedStatement comando;
+		ResultSet resultadoConsulta;
+		String query = "SELECT "
+						+"registro_entrada_salida.id AS idRegistro, " 
+					    +"concat(profesor.nombre,' ',profesor.apellido_paterno,' ',profesor.apellido_materno) AS nombreProfesor, " 
+					    +"registro_entrada_salida.tipo_registro AS tipoRegistro, " 
+					    +"registro_entrada_salida.hora_registro AS horaRegistro "
+					    +"FROM "
+					    +"registro_entrada_salida "
+						+" INNER JOIN profesor ON profesor.codigo = registro_entrada_salida.codigo_persona_registrada "
+						+ "ORDER BY idRegistro";
+		try {
+			comando = conexion.prepareStatement(query);
+			resultadoConsulta = comando.executeQuery();
+			while(resultadoConsulta.next()){
+				vectorRegistrosEntradaSalida.add(new RegistroEntradaSalida(resultadoConsulta.getString("nombreProfesor"), 
+						resultadoConsulta.getString("tipoRegistro"), 
+						resultadoConsulta.getInt("idRegistro"), 
+						resultadoConsulta.getTimestamp("horaRegistro").toString()));
+			}
+			return vectorRegistrosEntradaSalida;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return vectorRegistrosEntradaSalida;
+	}
+	/**
+	 * Regresa el ultimo id registrado en la tabla registro_entrada_salida
+	 * @return ultimo id registrado.
+	 */
+	public static int idUltimoRegistroEntradaSalida(){
+		int idRegistro=-1;
+		String sql = "SELECT MAX(id) as ultimoId FROM registro_entrada_salida";
+		PreparedStatement comando;
+		ResultSet resultadoConsulta;
+		try {
+			comando = conexion.prepareStatement(sql);
+			resultadoConsulta = comando.executeQuery();
+			while(resultadoConsulta.next()){
+				idRegistro = resultadoConsulta.getInt("ultimoId");
+			}
+			return idRegistro;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return idRegistro;
 	}
 }
