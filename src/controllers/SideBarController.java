@@ -59,7 +59,8 @@ public class SideBarController implements Initializable{
 		botonRegistroPrestamos.setOnAction(e->abrirVistaPrestamos());
 		botonCreacionDeExamenes.setOnAction(e->abrirVistaExamenes());
 		botonAsistenciaProfesores.setOnAction(e->abrirRelojChecador());
-		botonChat.setOnAction(e->{Toast.makeText(((Stage)botonChat.getScene().getWindow()), "Mensaje de prueba", 3500, 500, 500,Color.valueOf("#eee"));});
+		botonChat.setOnAction(e->{Toast.makeText(((Stage)botonChat.getScene().getWindow()), 
+				"Mensaje de prueba", 3500, 500, 500,Color.valueOf("#eee"));});
 	}
 	/**
 	 * Metodo que abre la ventana del reloj checador

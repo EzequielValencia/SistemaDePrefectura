@@ -1,18 +1,25 @@
 package dao;
 
+import java.io.Reader;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.Vector;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import pojos.Alumno;
 import pojos.Articulo;
+import pojos.Materia;
 import pojos.Persona;
 import pojos.Profesor;
 import pojos.RegistroEntradaSalida;
+import pojos.RegistroHorarioExamen;
 import pojos.Usuario;
 
 
@@ -383,5 +390,148 @@ public class DAO {
 			e.printStackTrace();
 		}
 		return idRegistro;
+	}
+	
+	public static ObservableList<Materia> listaMateriasPorGrado(int grado){
+		ObservableList<Materia> materias = FXCollections.observableArrayList();
+		PreparedStatement comando;
+		ResultSet resultadosConsulta;
+		String query="SELECT id,nombre,grado FROM sistemaprefectura.materia WHERE grado = ?";
+		try {
+			comando = conexion.prepareStatement(query);
+			comando.setInt(1, grado);
+			resultadosConsulta=comando.executeQuery();
+			while(resultadosConsulta.next()){
+				materias.add(new Materia(resultadosConsulta.getString("nombre"),resultadosConsulta.getInt("id"),
+						resultadosConsulta.getInt("grado")));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return materias;
+	}
+	
+	public static boolean  registraHorarioDeExamen(Time horaInicio,Time horaFin,Date fechaAplicacion,char grupo,
+			int grado,String turno,int idMateria){
+		String sql = "INSERT INTO horario_aplicacion_examen ("
+				+ "hora_inicio, "
+				+ "hora_fin,"
+				+ "fecha_aplicacion,"
+				+ "id_materia,"
+				+ "grupo_a_aplicar,"
+				+ "grado,"
+				+ "turno) "
+				+ "VALUES (?,?,?,?,?,?,?)";
+		PreparedStatement comando;
+		boolean comandoEjecutado=false;
+		try {
+			comando = conexion.prepareStatement(sql);
+			comando.setTime(1, horaInicio);
+			comando.setTime(2, horaFin);
+			comando.setDate(3, fechaAplicacion);
+			comando.setInt(4, idMateria);
+			comando.setString(5, String.valueOf(grupo));
+			comando.setInt(6, grado);
+			comando.setString(7, turno);
+			comando.execute();
+			comandoEjecutado = comando.getUpdateCount()>0;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return comandoEjecutado;
+	}
+	
+	public static int ultimoRegistroHorarioExamenInsertado(){
+		int idRegistro=-1;
+		String sql = "SELECT MAX(id) as ultimoId FROM horario_aplicacion_examen";
+		PreparedStatement comando;
+		ResultSet resultadoConsulta;
+		try {
+			comando = conexion.prepareStatement(sql);
+			resultadoConsulta = comando.executeQuery();
+			while(resultadoConsulta.next()){
+				idRegistro = resultadoConsulta.getInt("ultimoId");
+			}
+			return idRegistro;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return idRegistro;
+	}
+
+	public static boolean existeExamenRegistradoEnFechaHoraYGrupo(Time hora,Date fecha,char grupo,int grado,String turno){
+		boolean existe=false;
+		String sql =  
+				"SELECT "
+				+ "* "
+				+ "FROM "
+				+ "horario_aplicacion_examen "
+				+ "WHERE "
+				+ "fecha_aplicacion = ? "
+				+ "AND hora_inicio = ? "
+				+ "AND grupo_a_aplicar = ? "
+				+"AND grado = ? "
+				+ "AND turno = ?";
+		PreparedStatement comando;
+		ResultSet resultadoConsulta;
+		int cantidadRegistrosExistentes=0;
+		try {
+			comando = conexion.prepareStatement(sql);
+			comando.setTime(2, hora);
+			comando.setDate(1, fecha);
+			comando.setString(3, String.valueOf(grupo));
+			comando.setInt(4, grado);
+			comando.setString(5, turno);
+			
+			resultadoConsulta = comando.executeQuery();
+			while(resultadoConsulta.next()){
+				cantidadRegistrosExistentes++;
+			}
+			existe = cantidadRegistrosExistentes>=1;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return existe;
+	}
+	
+	public static Vector<RegistroHorarioExamen> horariosDeExamenes(){
+		Vector<RegistroHorarioExamen> examenes = new Vector<RegistroHorarioExamen>();
+		PreparedStatement comando;
+		String sql = "SELECT "
+					+"horario_aplicacion_examen.id AS idRegistro, "
+					+"materia.nombre AS nombreMateria, "
+					+"horario_aplicacion_examen.fecha_aplicacion AS fechaAplicacion, "
+					+"horario_aplicacion_examen.hora_inicio AS horaInicio, "
+					+"horario_aplicacion_examen.hora_fin AS horaFin, "
+					+"horario_aplicacion_examen.grado AS grado, "
+					+"horario_aplicacion_examen.grupo_a_aplicar AS grupo, "
+					+"horario_aplicacion_examen.turno AS turno "
+					+"FROM "
+					+"horario_aplicacion_examen "
+					+"INNER JOIN materia ON materia.id = horario_aplicacion_examen.id_materia";
+		ResultSet resultadoConsulta;
+		try {
+			comando = conexion.prepareStatement(sql);
+			resultadoConsulta = comando.executeQuery();
+			while (resultadoConsulta.next()) {
+				examenes.add(new RegistroHorarioExamen(resultadoConsulta.getString("nombreMateria"),
+						resultadoConsulta.getInt("idRegistro"), 
+						resultadoConsulta.getDate("fechaAplicacion").toString(), 
+						resultadoConsulta.getTime("horaInicio").toString(),
+						resultadoConsulta.getTime("horaFin").toString(), 
+						resultadoConsulta.getString("grado"), 
+						resultadoConsulta.getString("grupo"), 
+						resultadoConsulta.getString("turno")));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return examenes;
 	}
 }

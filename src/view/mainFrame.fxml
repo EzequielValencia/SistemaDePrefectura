@@ -32,14 +32,70 @@
 			</rotationAxis>
 		</JFXToolbar>
 		<JFXHamburger fx:id="menuAmburguesa" fillWidth="false" layoutX="10.0" layoutY="10.0" prefHeight="34.0" prefWidth="43.0" style="-fx-cursor: hand;" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0" />
-		<SplitPane fx:id="seccionCreacionDePrestamos" dividerPositions="0.3659491193737769" layoutY="44.0" prefHeight="555.0" prefWidth="1024.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="44.0">
+      <GridPane fx:id="seccionCreacionDeExamenes" hgap="10.0" layoutY="51.0" vgap="10.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="51.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+         <children>
+            <Label alignment="CENTER" prefHeight="64.0" prefWidth="923.0" text="Creación de Examenes" GridPane.columnIndex="1" GridPane.columnSpan="10" GridPane.valignment="TOP">
+               <font>
+                  <Font name="SansSerif Regular" size="52.0" />
+               </font>
+            </Label>
+            <JFXComboBox fx:id="comboGrado" focusTraversable="false" prefHeight="26.0" prefWidth="177.0" promptText="Grado" GridPane.columnSpan="2" GridPane.rowIndex="2" />
+            <JFXComboBox fx:id="comboGrupo" focusTraversable="false" prefHeight="26.0" prefWidth="177.0" promptText="Grupo" GridPane.columnSpan="2" GridPane.rowIndex="3" />
+            <JFXComboBox fx:id="comboTurno" focusTraversable="false" prefHeight="26.0" prefWidth="177.0" promptText="Turno" GridPane.columnSpan="2" GridPane.rowIndex="4" />
+            <JFXComboBox fx:id="comboMateria" focusTraversable="false" prefHeight="26.0" prefWidth="549.0" promptText="Materia" GridPane.columnIndex="3" GridPane.columnSpan="6" GridPane.rowIndex="1" />
+            <JFXTimePicker fx:id="selectorHoraFin" focusTraversable="false" promptText="Hora Fin" GridPane.columnIndex="7" GridPane.columnSpan="2" GridPane.rowIndex="2" />
+            <JFXDatePicker fx:id="selectorFechaAplicacion" focusTraversable="false" promptText="Fecha de aplicación" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="2" />
+            <JFXTimePicker fx:id="selectorHoraInicio" focusTraversable="false" promptText="Hora Inicio" GridPane.columnIndex="5" GridPane.columnSpan="2" GridPane.rowIndex="2" />
+            <JFXButton fx:id="botonCancelar" prefHeight="62.0" prefWidth="158.0" text="Cancelar" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="3" />
+            <JFXButton fx:id="botonRegistrar" prefHeight="62.0" prefWidth="178.0" text="Registrar" GridPane.columnIndex="7" GridPane.columnSpan="2" GridPane.rowIndex="3" />
+            <TableView fx:id="tablaRegistroExamenes" prefHeight="200.0" prefWidth="614.0" GridPane.columnIndex="2" GridPane.columnSpan="8" GridPane.rowIndex="4" GridPane.rowSpan="3">
+              <columns>
+                <TableColumn prefWidth="75.0" text="No. Registro" />
+                <TableColumn prefWidth="124.0" text="Nombre Materia" />
+                  <TableColumn prefWidth="86.0" text="Grado" />
+                  <TableColumn prefWidth="86.0" text="Grupo" />
+                  <TableColumn prefWidth="86.0" text="Turno" />
+                  <TableColumn prefWidth="68.0" text="Fecha" />
+                  <TableColumn prefWidth="86.0" text="Hora Inicio" />
+                  <TableColumn prefWidth="124.0" text="Hora Fin" />
+              </columns>
+            </TableView>
+         </children>
+      </GridPane>
+		<SplitPane fx:id="seccionCreacionDePrestamos" dividerPositions="0.3659491193737769" layoutX="-1.0" layoutY="44.0" prefHeight="555.0" prefWidth="1024.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="44.0">
 			<items>
 				<AnchorPane id="panelBusqueda" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
 					<children>
 						<Pane prefHeight="549.0" prefWidth="371.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 							<children>
-								<JFXTextField fx:id="textNombreArticulo" focusTraversable="false" labelFloat="true" layoutX="20.0" layoutY="102.0" prefHeight="25.0" prefWidth="194.0" promptText="Nombre Articulo" />
-								<JFXTextArea fx:id="areaDescripcionArticulo" focusTraversable="false" labelFloat="true" layoutX="17.0" layoutY="154.0" prefHeight="41.0" prefWidth="205.0" promptText="Descripción" />
+								<JFXTextField fx:id="textNombreArticulo" labelFloat="true" layoutX="20.0" layoutY="102.0" prefHeight="25.0" prefWidth="194.0" promptText="Nombre Articulo" />
+								<JFXTextArea fx:id="areaDescripcionArticulo" labelFloat="true" layoutX="17.0" layoutY="154.0" prefHeight="41.0" prefWidth="205.0" promptText="Descripción" />
 								<ImageView fx:id="imagenArticulo" fitHeight="116.0" fitWidth="138.0" layoutX="232.0" layoutY="96.0" pickOnBounds="true" />
 								<JFXButton fx:id="botonAgregarALista" layoutX="20.0" layoutY="478.0" prefHeight="25.0" prefWidth="106.0" text="Agregar a lista">
 									<cursor>
@@ -61,12 +117,12 @@
 										<Cursor fx:constant="HAND" />
 									</cursor>
 								</Label>
-								<JFXTextField fx:id="textCodigoArticulo" focusTraversable="false" labelFloat="true" layoutX="20.0" layoutY="55.0" prefHeight="25.0" prefWidth="148.0" promptText="Codigo articulo" />
-								<JFXTextField fx:id="textCodigoSolicitante" focusTraversable="false" labelFloat="true" layoutX="20.0" layoutY="276.0" prefHeight="25.0" prefWidth="118.0" promptText="Codigo Solicitante" />
-								<JFXTextField fx:id="textNombreSolicitante" focusTraversable="false" labelFloat="true" layoutX="20.0" layoutY="332.0" prefHeight="25.0" prefWidth="327.0" promptText="Nombre" />
-								<JFXTextField fx:id="textGrado" focusTraversable="false" labelFloat="true" layoutX="17.0" layoutY="397.0" prefHeight="25.0" prefWidth="56.0" promptText="Grado" />
-								<JFXTextField fx:id="textGrupo" focusTraversable="false" labelFloat="true" layoutX="94.0" layoutY="397.0" prefHeight="25.0" prefWidth="106.0" promptText="Grupo" />
-								<JFXTextField fx:id="textTurno" focusTraversable="false" labelFloat="true" layoutX="214.0" layoutY="397.0" promptText="Turno" />
+								<JFXTextField fx:id="textCodigoArticulo" labelFloat="true" layoutX="20.0" layoutY="55.0" prefHeight="25.0" prefWidth="148.0" promptText="Codigo articulo" />
+								<JFXTextField fx:id="textCodigoSolicitante" labelFloat="true" layoutX="20.0" layoutY="276.0" prefHeight="25.0" prefWidth="118.0" promptText="Codigo Solicitante" />
+								<JFXTextField fx:id="textNombreSolicitante" labelFloat="true" layoutX="20.0" layoutY="332.0" prefHeight="25.0" prefWidth="327.0" promptText="Nombre" />
+								<JFXTextField fx:id="textGrado" labelFloat="true" layoutX="17.0" layoutY="397.0" prefHeight="25.0" prefWidth="56.0" promptText="Grado" />
+								<JFXTextField fx:id="textGrupo" labelFloat="true" layoutX="94.0" layoutY="397.0" prefHeight="25.0" prefWidth="106.0" promptText="Grupo" />
+								<JFXTextField fx:id="textTurno" labelFloat="true" layoutX="214.0" layoutY="397.0" promptText="Turno" />
 								<Label id="etiquetaBorrarTodo" fx:id="etiquetaBorrarSolicitante" layoutX="151.0" layoutY="287.0" style="-fx-font-weight: bold;" text="Borrar Todo" underline="true">
 									<cursor>
 										<Cursor fx:constant="HAND" />
@@ -104,55 +160,6 @@
 				</AnchorPane>
 			</items>
 		</SplitPane>
-      <GridPane fx:id="seccionCreacionDeExamenes" hgap="10.0" layoutY="46.0" prefHeight="556.0" prefWidth="1024.0" vgap="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="46.0">
-         <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-         </columnConstraints>
-         <rowConstraints>
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="108.0" minHeight="10.0" prefHeight="62.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="131.0" minHeight="10.0" prefHeight="54.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="128.0" minHeight="10.0" prefHeight="128.0" vgrow="SOMETIMES" />
-         </rowConstraints>
-         <children>
-            <JFXComboBox fx:id="comboGrado" focusTraversable="false" labelFloat="true" prefHeight="26.0" prefWidth="309.0" promptText="Grado" GridPane.columnSpan="2" GridPane.rowIndex="2" />
-            <JFXComboBox fx:id="comboGrupo" focusTraversable="false" labelFloat="true" prefHeight="26.0" prefWidth="309.0" promptText="Grupo" GridPane.columnSpan="2" GridPane.rowIndex="3" />
-            <JFXComboBox fx:id="comboTurno" focusTraversable="false" labelFloat="true" prefHeight="26.0" prefWidth="213.0" promptText="Turno" GridPane.columnSpan="2" GridPane.rowIndex="4" />
-            <JFXDatePicker fx:id="selectorFecha" focusTraversable="false" prefHeight="24.0" prefWidth="309.0" promptText="Fecha examen" showWeekNumbers="true" GridPane.columnIndex="3" GridPane.columnSpan="3" GridPane.rowIndex="2" />
-            <JFXTimePicker fx:id="selectorHora" focusTraversable="false" prefHeight="24.0" prefWidth="305.0" promptText="Hora exámen" GridPane.columnIndex="8" GridPane.columnSpan="3" GridPane.rowIndex="2" />
-            <JFXComboBox fx:id="selectorMateroa" focusTraversable="false" labelFloat="true" prefHeight="26.0" prefWidth="669.0" promptText="Materia" GridPane.columnIndex="3" GridPane.columnSpan="8" GridPane.rowIndex="1" />
-            <Label prefHeight="68.0" prefWidth="856.0" text="GENERADOR DE HORARIOS PARA EXAMENES" GridPane.columnIndex="1" GridPane.columnSpan="10">
-               <font>
-                  <Font name="SansSerif Bold" size="33.0" />
-               </font>
-            </Label>
-            <JFXButton fx:id="botonBorrarCampos" prefHeight="66.0" prefWidth="273.0" text="Reiniciar campos" GridPane.columnIndex="3" GridPane.columnSpan="3" GridPane.rowIndex="3" />
-            <JFXButton fx:id="botonRegistrar" prefHeight="66.0" prefWidth="273.0" text="Ingresar" GridPane.columnIndex="8" GridPane.columnSpan="3" GridPane.rowIndex="3" />
-            <TableView prefHeight="225.0" prefWidth="74.0" GridPane.columnIndex="3" GridPane.columnSpan="8" GridPane.rowIndex="4" GridPane.rowSpan="3">
-              <columns>
-                <TableColumn prefWidth="75.0" text="C1" />
-                <TableColumn prefWidth="75.0" text="C2" />
-              </columns>
-            </TableView>
-         </children>
-         <padding>
-            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-         </padding>
-      </GridPane>
-      <JFXDrawer id="sideBar" fx:id="sideBar" layoutX="10.0" layoutY="60.0" prefHeight="460.0" prefWidth="130.0" scaleZ="0.0" stylesheets="@mainFrame.css" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="50.0" />
+		<JFXDrawer id="sideBar" fx:id="sideBar" layoutY="50.0" prefHeight="460.0" prefWidth="130.0" scaleZ="0.0" stylesheets="@mainFrame.css" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="50.0" />
 	</children>
 </AnchorPane>

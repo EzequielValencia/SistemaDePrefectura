@@ -2,18 +2,26 @@ package controllers;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Date;
+import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.ResourceBundle;
+import java.util.Vector;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.controls.JFXTimePicker;
 import com.jfoenix.transitions.hamburger.HamburgerBackArrowBasicTransition;
+import javafx.scene.paint.Color;
 
 import dao.DAO;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -29,11 +37,15 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import pojos.Alumno;
 import pojos.Articulo;
+import pojos.Materia;
 import pojos.Persona;
 import pojos.Prestamo;
 import pojos.Profesor;
+import pojos.RegistroHorarioExamen;
+import util.Toast;
 /**
  * 
  * MainFrameController.
@@ -57,9 +69,11 @@ public class MainFrameController implements Initializable{
 	@FXML private JFXComboBox<Integer> comboGrado;
 	@FXML private JFXComboBox<String> comboTurno;
 	@FXML private JFXComboBox<Character> comboGrupo;
+	@FXML private JFXComboBox<String> comboMateria;
+	@FXML private TableView<RegistroHorarioExamen> tablaRegistroExamenes;
 	@FXML private JFXButton botonBorrarCampos,botonRegistrar;
-	
-	
+	@FXML private JFXDatePicker selectorFechaAplicacion;
+	@FXML private JFXTimePicker selectorHoraInicio,selectorHoraFin;	
 	
 	public static JFXDrawer sideBarVista;
 	public static GridPane seccionExamenes;
@@ -68,6 +82,8 @@ public class MainFrameController implements Initializable{
 	private Persona solicitante;
 	private Prestamo prestamoGenerado;
 	private ObservableList<Prestamo> listaArticulos;
+	private ObservableList<Materia> listaMaterias;
+	private ObservableList<RegistroHorarioExamen> listaDeExamenes;
 	@Override
 	/**
 	 * Metodo que se utiliza una vez se carga la ventana para inicializar componentes y 
@@ -75,9 +91,17 @@ public class MainFrameController implements Initializable{
 	 */
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		listaArticulos = FXCollections.observableArrayList();
+		listaDeExamenes = FXCollections.observableArrayList();
+		Vector<RegistroHorarioExamen> examenes = DAO.horariosDeExamenes();
 		solicitante = null;
 		articuloEncontrado = null;
 		tablaPrestamos.setItems(listaArticulos);
+		
+		tablaRegistroExamenes.setItems(listaDeExamenes);
+		for(int i=0;i<examenes.size();i++){
+			agregarExamenATabla(examenes.get(i));
+		}
+		
 		seccionExamenes = seccionCreacionDeExamenes;
 		seccionPrestamosVista = seccionCreacionDePrestamos;
 		sideBarVista = sideBar;
@@ -91,14 +115,30 @@ public class MainFrameController implements Initializable{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		transformacionAFlecha();
-		configurarColumnasTabla();
+		configurarColumnasTablas();
 		agregarAccionesABotonesPrestamos();
 		inicializaComboBoxs();
 	}
 	
 	private void inicializaComboBoxs(){
+		comboGrado.setItems(FXCollections.observableArrayList(1,2,3,4,5,6,7,8));
+		comboGrado.valueProperty().addListener(new ChangeListener<Integer>(){
+
+			@Override
+			public void changed(ObservableValue<? extends Integer> observable, Integer oldValue, Integer newValue) {
+				// TODO Auto-generated method stub
+				listaMaterias = DAO.listaMateriasPorGrado(newValue);
+				comboMateria.getItems().clear();
+				for(int i=0;i<listaMaterias.size();i++){
+					comboMateria.getItems().add(listaMaterias.get(i).getNombre());
+				}
+			}
+			
+		});
+		comboTurno.setItems(FXCollections.observableArrayList("Matutino","Vespertino","Mixto","Nocturno"));
+		comboGrupo.setItems(FXCollections.observableArrayList('A','B','C','D','E','F','G','H'));
 		
 	}
 	
@@ -111,8 +151,92 @@ public class MainFrameController implements Initializable{
 		etiquetaBorrarTodo.setOnMouseClicked(e->borrarCamposArticulo());
 		botonAgregarALista.setOnAction(e->agregarATablaArticulo());
 		botonBuscarAlumno.setOnAction(e->buscarSolicitante());
+		botonRegistrar.setOnAction(e->{
+			if(camposCompletosParaRegistrarExamen()){
+			crearRegistroHorarioExamen();
+			}
+		});
 	}
-	
+	private boolean camposCompletosParaRegistrarExamen(){
+		boolean camposLlenos = false;
+		String mensaje="";
+
+		if(comboMateria.getValue()==null){
+			mensaje+="Materia\n";
+		}if(comboGrado.getValue()==null){
+			mensaje+="Grado\n";
+		}if(comboGrupo.getValue()==null){
+			mensaje+="Grupo\n";
+		}if(comboTurno.getValue()==null){
+			mensaje+="Turno\n";
+		}if(selectorFechaAplicacion.getValue()==null){
+			mensaje+="Fecha aplicacion\n";
+		}if(selectorHoraInicio.getValue()==null){
+			mensaje+="Hora de inicio\n";
+		}if(selectorHoraFin.getValue()==null){
+			mensaje+="Hora de fin\n";
+		}
+		if(mensaje.length()>0){
+			Toast.makeText((Stage)botonRegistrar.getScene().getWindow(),"Falta seleccionar \n"+mensaje, 3500,
+					500,500,Color.RED);
+		}else{
+			camposLlenos = true;
+		}
+		return camposLlenos;
+	}
+	/**
+	 * 
+	 */
+	@SuppressWarnings("deprecation")
+	private void crearRegistroHorarioExamen(){
+		Date fechaAplicacion = new Date(selectorFechaAplicacion.getValue().getYear()-1901,
+				selectorFechaAplicacion.getValue().getDayOfMonth(),
+				selectorFechaAplicacion.getValue().getMonthValue());
+		Time horaInicio = new Time(selectorHoraInicio.getValue().getHour(),
+				selectorHoraInicio.getValue().getMinute(), selectorHoraInicio.getValue().getSecond());
+		Time horaFin = new Time(selectorHoraFin.getValue().getHour(),
+				selectorHoraFin.getValue().getMinute(), selectorHoraFin.getValue().getSecond());
+		char grupo = comboGrupo.getValue();
+		int grado = comboGrado.getValue();
+		String turno = comboTurno.getValue();
+		String nombreMateria = comboMateria.getValue();
+		int idMateria = codigoMateriaSeleccionada(nombreMateria);
+		int idRegistro;
+		RegistroHorarioExamen registro;
+		if(DAO.existeExamenRegistradoEnFechaHoraYGrupo(horaInicio, fechaAplicacion, grupo,grado, turno)){
+			Toast.makeText(((Stage)botonRegistrar.getScene().getWindow()), ("El grupo "+grado+".-"+grupo+" del turno "+turno+".\n"+
+					"Ya tiene un examen a esa hora")
+					, 3500, 500, 500, Color.RED);
+		}else{
+			if(DAO.registraHorarioDeExamen(horaInicio, horaFin, fechaAplicacion, grupo, grado, turno, idMateria)){
+				
+				idRegistro = DAO.ultimoRegistroHorarioExamenInsertado();
+				
+				registro = new RegistroHorarioExamen(nombreMateria,idRegistro,fechaAplicacion.toString(),
+						horaInicio.toString(),horaFin.toString(),String.valueOf(grado),String.valueOf(grupo),turno);
+				;
+				agregarExamenATabla(registro);
+			}
+		}
+	}
+	/**
+	 * 
+	 * @param nombreMateria
+	 * @return
+	 */
+	private int codigoMateriaSeleccionada(String nombreMateria){
+		Materia materiaSeleccionada;
+		int idMateria=0;
+		for(int i=0;i<listaMaterias.size();i++){
+			materiaSeleccionada = listaMaterias.get(i);
+			
+			if(materiaSeleccionada.getNombre().equals(nombreMateria)){
+
+				idMateria = materiaSeleccionada.getId();
+			}
+		}
+		return idMateria;
+	}
 	/**
 	 * Borra los cambpos del articulo poniendoles 
 	 * caracter nulo como texto
@@ -175,6 +299,36 @@ public class MainFrameController implements Initializable{
 		}
 
 	}
+	@SuppressWarnings("unchecked")
+	private void agregarExamenATabla(RegistroHorarioExamen examen){
+		TableColumn<RegistroHorarioExamen, Integer> columnaIdExamen = ((TableColumn<RegistroHorarioExamen, Integer>) 
+																	tablaRegistroExamenes.getColumns().get(0));
+		TableColumn<RegistroHorarioExamen, String> columnaNombreMateria = ((TableColumn<RegistroHorarioExamen, String>)
+																			tablaRegistroExamenes.getColumns().get(1));
+		TableColumn<RegistroHorarioExamen, String> columnaGrado = ((TableColumn<RegistroHorarioExamen, String>)
+				tablaRegistroExamenes.getColumns().get(2));
+		TableColumn<RegistroHorarioExamen, String> columnaGrupo = ((TableColumn<RegistroHorarioExamen, String>)
+				tablaRegistroExamenes.getColumns().get(3));
+		TableColumn<RegistroHorarioExamen, String> columnaTurno = ((TableColumn<RegistroHorarioExamen, String>)
+				tablaRegistroExamenes.getColumns().get(4));
+		TableColumn<RegistroHorarioExamen, String> columnaFechaAplicacion = ((TableColumn<RegistroHorarioExamen, String>)
+																	tablaRegistroExamenes.getColumns().get(5));
+		TableColumn<RegistroHorarioExamen, String> columnahHoraInicio = ((TableColumn<RegistroHorarioExamen, String>)
+				tablaRegistroExamenes.getColumns().get(6));
+		TableColumn<RegistroHorarioExamen, String> columnaHoraFin = ((TableColumn<RegistroHorarioExamen, String>)
+				tablaRegistroExamenes.getColumns().get(7));
+		
+		listaDeExamenes.add(0,examen);
+		columnaIdExamen.setCellValueFactory(new PropertyValueFactory<RegistroHorarioExamen,Integer>("idRegistro"));
+		columnaNombreMateria.setCellValueFactory(new PropertyValueFactory<RegistroHorarioExamen,String>("nombreMateria"));
+		columnaGrado.setCellValueFactory(new PropertyValueFactory<RegistroHorarioExamen,String>("grado"));
+		columnaGrupo.setCellValueFactory(new PropertyValueFactory<RegistroHorarioExamen,String>("grupo"));
+		columnaTurno.setCellValueFactory(new PropertyValueFactory<RegistroHorarioExamen,String>("turno"));
+		columnaFechaAplicacion.setCellValueFactory(new PropertyValueFactory<RegistroHorarioExamen,String>("fechaAplicacion"));
+		columnahHoraInicio.setCellValueFactory(new PropertyValueFactory<RegistroHorarioExamen,String>("horaInicio"));
+		columnaHoraFin.setCellValueFactory(new PropertyValueFactory<RegistroHorarioExamen,String>("horaFin"));
+		
+	}
 	
 	/**
 	 * Metodo para buscar el articulo.
@@ -219,13 +373,20 @@ public class MainFrameController implements Initializable{
 	 * para que puedan ser redimencionadas y ocupen el mismo porcentaje
 	 * de ancho al momento de que la ventana se redimenciona.
 	 */
-	private void configurarColumnasTabla(){
+	private void configurarColumnasTablas(){
 		tablaPrestamos.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+		tablaRegistroExamenes.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 		ObservableList<TableColumn<Prestamo, ?>> columnas = tablaPrestamos.getColumns();
+		ObservableList<TableColumn<RegistroHorarioExamen, ?>> columnasRegistroExamen = tablaRegistroExamenes.getColumns();
 		int cantidadColumnas = columnas.size();
+		int cantidadColumnasTablaRegistroExamenes = columnasRegistroExamen.size();
 		
 		for(int i=0;i<cantidadColumnas;i++){
 			columnas.get(i).setMaxWidth(1f * Integer.MAX_VALUE*(100/cantidadColumnas));
+		}
+		
+		for(int i=0;i<cantidadColumnasTablaRegistroExamenes;i++){
+			columnasRegistroExamen.get(i).setMaxWidth(1f * Integer.MAX_VALUE*(100/cantidadColumnas));
 		}
 	}
 	/**

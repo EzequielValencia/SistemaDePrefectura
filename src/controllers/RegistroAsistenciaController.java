@@ -37,7 +37,7 @@ import util.Toast;
  * RegistroAsistenciaController.
  * Clase que controla los eventos de la ventana registroAsistencia
  */
-public class RegistroAsistenciaController implements Initializable{
+public class RegistroAsistenciaController implements Initializable,Runnable{
 	private String horaEtiqueta,minutoEtiqueta,segundosEtiqueta;
 	@FXML private Label etiquetaReloj,etiquetaNombreProfesor,etiquetaTipoTipoRegistro
 						,etiquetaFechaRegistro;
@@ -185,6 +185,13 @@ public class RegistroAsistenciaController implements Initializable{
 		for(int i=0;i<cantidadColumnas;i++){
 			columnas.get(i).setMaxWidth(1f * Integer.MAX_VALUE*(100/cantidadColumnas));
 		}
+	}
+
+
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
