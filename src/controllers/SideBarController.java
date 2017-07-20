@@ -11,12 +11,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-
-import util.*;
+import pojos.Usuario;
+import util.Toast;
 /**
  * 
  * SideBarController
@@ -34,9 +35,11 @@ public class SideBarController implements Initializable{
 	@FXML
 	private JFXButton botonCreacionDeExamenes;
 	@FXML
+	private JFXButton botonAgregarUsuario;
+	@FXML
 	private JFXButton botonSalir;
-	
-
+	@FXML 
+	private Label etiquetaNombreDelUsuario;
 	@Override
 	/**
 	 * initalize
@@ -48,7 +51,7 @@ public class SideBarController implements Initializable{
 		Image image = new Image("/images/avatar.png");
 		imagenUsuario.setImage(image);
 		agregarAcionesABotones();
-		
+		etiquetaNombreDelUsuario.setText(Usuario.getNombre());
 	}
 
 	/**
@@ -59,8 +62,44 @@ public class SideBarController implements Initializable{
 		botonRegistroPrestamos.setOnAction(e->abrirVistaPrestamos());
 		botonCreacionDeExamenes.setOnAction(e->abrirVistaExamenes());
 		botonAsistenciaProfesores.setOnAction(e->abrirRelojChecador());
-		botonChat.setOnAction(e->{Toast.makeText(((Stage)botonChat.getScene().getWindow()), 
-				"Mensaje de prueba", 3500, 500, 500,Color.valueOf("#eee"));});
+		botonChat.setOnAction(e->abrirChat());
+		botonAgregarUsuario.setOnAction(e->abrirAgregarUsuario());
+	}
+	
+	private void abrirAgregarUsuario(){
+		Stage vistaAgregarUsuario = new Stage();
+		Parent root;
+		Scene escena;
+		if(Usuario.getCategoria().equals("prefecto")){
+			Toast.makeText(((Stage)botonAgregarUsuario.getScene().getWindow()),"No tiene permiso de usar esta opcion", 
+					3500, 500, 500,Color.RED);
+		}else{
+			try {
+				root = FXMLLoader.load(getClass().getResource("/view/vistaAgregarUsuario.fxml"));
+				escena = new Scene(root, 800, 600);
+				vistaAgregarUsuario.setScene(escena);
+				vistaAgregarUsuario.show();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	private void abrirChat(){
+		Stage vistaChat = new Stage();
+		Parent root;
+		Scene escena;
+		
+		try {
+			root = FXMLLoader.load(getClass().getResource("/view/vistaChat.fxml"));
+			escena = new Scene(root,600,400);
+			vistaChat.setScene(escena);
+			vistaChat.show();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	/**
 	 * Metodo que abre la ventana del reloj checador
@@ -84,10 +123,14 @@ public class SideBarController implements Initializable{
 	 * Metodo que abre la vista de creacion de examenes
 	 */
 	private void abrirVistaExamenes(){
-		
-		MainFrameController.seccionExamenes.setVisible(true);
-		MainFrameController.seccionPrestamosVista.setVisible(false);
-		MainFrameController.sideBarVista.close();
+		if(Usuario.getCategoria().equals("coordinador")){
+			MainFrameController.seccionExamenes.setVisible(true);
+			MainFrameController.seccionPrestamosVista.setVisible(false);
+			MainFrameController.sideBarVista.close();
+		}else{
+			Toast.makeText((Stage)botonCreacionDeExamenes.getScene().getWindow(), 
+					"No tiene permiso de usar esta opcion", 3500, 500, 500,Color.RED);
+		}
 	}
 	/**
 	 * Metodo que abre la vista del sistema de prestamos

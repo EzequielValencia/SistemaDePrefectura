@@ -160,6 +160,9 @@
 				</AnchorPane>
 			</items>
 		</SplitPane>
-		<JFXDrawer id="sideBar" fx:id="sideBar" layoutY="50.0" prefHeight="460.0" prefWidth="130.0" scaleZ="0.0" stylesheets="@mainFrame.css" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="50.0" />
+		<JFXDrawer id="sideBar" fx:id="sideBar" layoutY="50.0" prefHeight="460.0" prefWidth="130.0" scaleZ="0.0" stylesheets="@mainFrame.css" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="50.0">
+         <rotationAxis>
+            <Point3D />
+         </rotationAxis></JFXDrawer>
 	</children>
 </AnchorPane>

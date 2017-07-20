@@ -1,16 +1,16 @@
 package pojos;
 
 public class Usuario {
-	private int id;
-	private String nombre;
-	private String apellidoPaterno;
-	private String apellidoMaterno;
-	private String usuario;
-	private String contrasenia;
-	private int categoria;
+	private static int id;
+	private static String nombre;
+	private static String apellidoPaterno;
+	private static String apellidoMaterno;
+	private static String usuario;
+	private static String contrasenia;
+	private static String categoria;
 	
 	public Usuario(int id, String nombre, String apellidoPaterno, String apellidoMaterno, String usuario,
-			String contrasenia,int categoria) {
+			String contrasenia,String categoria) {
 		
 		setId(id);
 		setNombre(nombre);
@@ -20,46 +20,46 @@ public class Usuario {
 		setContrasenia(contrasenia);
 		setCategoria(categoria);
 	}
-	public int getCategoria() {
+	public static String getCategoria() {
 		return categoria;
 	}
-	public void setCategoria(int categoria) {
-		this.categoria = categoria;
+	public static void setCategoria(String categoria1) {
+		categoria = categoria1;
 	}
-	public int getId() {
+	public static int getId() {
 		return id;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public static void setId(int id1) {
+		id = id1;
 	}
-	public String getNombre() {
+	public static String getNombre() {
 		return nombre;
 	}
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public static void setNombre(String nombre1) {
+		nombre = nombre1;
 	}
-	public String getApellidoPaterno() {
+	public static String getApellidoPaterno() {
 		return apellidoPaterno;
 	}
-	public void setApellidoPaterno(String apellidoPaterno) {
-		this.apellidoPaterno = apellidoPaterno;
+	public static void setApellidoPaterno(String apellidoPaterno1) {
+		apellidoPaterno = apellidoPaterno1;
 	}
-	public String getApellidoMaterno() {
+	public static String getApellidoMaterno() {
 		return apellidoMaterno;
 	}
-	public void setApellidoMaterno(String apellidoMaterno) {
-		this.apellidoMaterno = apellidoMaterno;
+	public static void setApellidoMaterno(String apellidoMaterno1) {
+		apellidoMaterno = apellidoMaterno1;
 	}
-	public String getUsuario() {
+	public static String getUsuario() {
 		return usuario;
 	}
-	public void setUsuario(String usuario) {
-		this.usuario = usuario;
+	public static void setUsuario(String usuario1) {
+		usuario = usuario1;
 	}
-	public String getContrasenia() {
+	public static String getContrasenia() {
 		return contrasenia;
 	}
-	public void setContrasenia(String contrasenia) {
-		this.contrasenia = contrasenia;
+	public static void setContrasenia(String contrasenia1) {
+		contrasenia = contrasenia1;
 	}
 }

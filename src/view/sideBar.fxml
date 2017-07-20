@@ -1,18 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="460.0" prefWidth="130.0" styleClass="card-unpadded" stylesheets="@sideBar.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.SideBarController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="519.0" prefWidth="130.0" styleClass="card-unpadded" stylesheets="@sideBar.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.SideBarController">
 	<children>
 		<Pane id="panelmagen" prefHeight="121.0" prefWidth="130.0">
          <children>
             <Pane id="imagenUser" layoutX="24.0" layoutY="13.0" prefHeight="80.0" prefWidth="80.0">
                <children>
                   <ImageView fx:id="imagenUsuario" fitHeight="46.0" fitWidth="47.0" layoutX="17.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true" />
+                  <Label fx:id="etiquetaNombreDelUsuario" alignment="CENTER" layoutX="-16.0" layoutY="58.0" prefHeight="16.0" prefWidth="115.0" textAlignment="CENTER" textFill="#e4e2e2" />
                </children>
             </Pane>
          </children></Pane>
@@ -28,6 +30,11 @@
             <Font name="SansSerif Regular" size="12.0" />
          </font>
       </JFXButton>
-		<JFXButton id="botonSalir" fx:id="botonSalir" prefHeight="60.0" prefWidth="129.0" text="Salir" />
+		<JFXButton id="botonSalir" fx:id="botonAgregarUsuario" prefHeight="60.0" prefWidth="129.0" text="Agregar &#10;Usuario" textAlignment="CENTER" />
+      <JFXButton id="botonRegistroPrestamos" fx:id="botonSalir" prefHeight="60.0" prefWidth="129.0" text="Salir" textAlignment="CENTER">
+         <font>
+            <Font name="SansSerif Regular" size="12.0" />
+         </font>
+      </JFXButton>
 	</children>
 </VBox>

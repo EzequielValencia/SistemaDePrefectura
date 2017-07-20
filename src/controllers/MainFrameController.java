@@ -17,7 +17,6 @@ import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXTimePicker;
 import com.jfoenix.transitions.hamburger.HamburgerBackArrowBasicTransition;
-import javafx.scene.paint.Color;
 
 import dao.DAO;
 import javafx.beans.value.ChangeListener;
@@ -37,6 +36,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import pojos.Alumno;
 import pojos.Articulo;
@@ -45,6 +45,7 @@ import pojos.Persona;
 import pojos.Prestamo;
 import pojos.Profesor;
 import pojos.RegistroHorarioExamen;
+import pojos.Usuario;
 import util.Toast;
 /**
  * 
@@ -90,6 +91,7 @@ public class MainFrameController implements Initializable{
 	 * acctiones a los botones
 	 */
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		System.out.println(Usuario.getNombre());
 		listaArticulos = FXCollections.observableArrayList();
 		listaDeExamenes = FXCollections.observableArrayList();
 		Vector<RegistroHorarioExamen> examenes = DAO.horariosDeExamenes();
@@ -405,11 +407,11 @@ public class MainFrameController implements Initializable{
 			
 			if(sideBar.isShown()){
 				sideBar.setScaleZ(0);
-				
+				sideBar.setTranslateZ(-1);
 				sideBar.close();
 			}else{
 				sideBar.setScaleZ(1);
-				
+				sideBar.setTranslateZ(1);
 				sideBar.open();
 
 			}

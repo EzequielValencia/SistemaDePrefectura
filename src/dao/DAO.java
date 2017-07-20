@@ -1,6 +1,5 @@
 package dao;
 
-import java.io.Reader;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
@@ -56,7 +55,7 @@ public class DAO {
 	 * @param password password del usuario
 	 * @return retorna un vector de usuarios
 	 */
-	public static Vector<Usuario> verificaUsuario(String usuario,String password){
+	public static boolean verificaUsuario(String usuario,String password){
 		ResultSet resultadoConsulta;
 		String query ="SELECT"
 				+ " usuario.id,"
@@ -72,7 +71,7 @@ public class DAO {
 				+ " usuario.usuario = ?"
 				+ " AND "
 				+ "usuario.contrasenia = ?"; 
-		Vector<Usuario> usuarios = new Vector<Usuario>();
+		
 		try {
 			PreparedStatement comando = conexion.prepareStatement(query);
 			comando.setString(1, usuario);
@@ -80,22 +79,19 @@ public class DAO {
 			resultadoConsulta = comando.executeQuery();
 
 			while (resultadoConsulta.next()) {
-				usuarios.addElement(new Usuario(
-						resultadoConsulta.getInt("id"),
-						resultadoConsulta.getString("nombres"),
-						resultadoConsulta.getString("apellido_paterno"),
-						resultadoConsulta.getString("apellido_materno"),
-						resultadoConsulta.getString("usuario"),
-						resultadoConsulta.getString("contrasenia"),
-						resultadoConsulta.getInt("categoria")
-						));
+				Usuario.setId(resultadoConsulta.getInt("id"));
+				Usuario.setNombre(resultadoConsulta.getString("nombres"));
+				Usuario.setUsuario(resultadoConsulta.getString("usuario"));
+				Usuario.setApellidoPaterno(resultadoConsulta.getString("apellido_paterno"));
+				Usuario.setApellidoMaterno(resultadoConsulta.getString("apellido_materno"));
+				Usuario.setCategoria(resultadoConsulta.getString("categoria"));
 			}
-			return usuarios;
+			return true;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return null;
+		return false;
 	}
 	/**
 	 * Verifica que exista el articulo en la base de datos
@@ -533,5 +529,29 @@ public class DAO {
 			e.printStackTrace();
 		}
 		return examenes;
+	}
+	
+	
+	public static boolean agregarUsuario(String nombre, String apellidoPaterno, String apellidoMaterno, String usuario,
+			String password, String tipoUsuario){
+		String sql="INSERT INTO `usuario` (`nombres`, `apellido_paterno`, "
+				+ "`apellido_materno`, `usuario`, `contrasenia`, `catergoria`) "
+				+ "VALUES (?, ?, ?,?,?, ?);";
+		PreparedStatement comando;
+		try {
+			comando = conexion.prepareStatement(sql);
+			comando.setString(1,nombre);
+			comando.setString(2, apellidoPaterno);
+			comando.setString(3, apellidoMaterno);
+			comando.setString(4, usuario);
+			comando.setString(5, password);
+			comando.setString(6, tipoUsuario);
+			comando.execute();
+			return comando.getUpdateCount()>0;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
 	}
 }

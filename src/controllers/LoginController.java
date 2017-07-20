@@ -3,7 +3,6 @@ package controllers;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.Vector;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
@@ -19,7 +18,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-import pojos.Usuario;
 
 public class LoginController implements Initializable {
 
@@ -52,8 +50,8 @@ public class LoginController implements Initializable {
 	 * Verifica la existencia del usuario y la contrase~a del usuario
 	 */
 	private void verificaUsuario(){
-		Vector<Usuario> usuarios = DAO.verificaUsuario(textUsuario.getText(), textPassword.getText());
-		if(usuarios.size()==1){
+		boolean existe = DAO.verificaUsuario(textUsuario.getText(), textPassword.getText());
+		if(existe){
 			abreVentanaPricipal();
 		}else{
 			labelMensaje.setText("Verifique su usuario y contrase~a");
